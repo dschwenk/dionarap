@@ -1,11 +1,16 @@
 package dionarap;
 
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
@@ -21,7 +26,7 @@ public class Toolbar extends JToolBar {
 	private static final long serialVersionUID = 1L;
 	
 	Hauptfenster hauptfenster;
-	
+
 	/* Toolbarelemente */
 	JButton neuesspiel;
 	JPanel punktestand;
@@ -43,7 +48,8 @@ public class Toolbar extends JToolBar {
 		this.setFloatable(false);
 		
 		/* Button neues Spiel */		
-		neuesspiel = new JButton("Neues Spiel");		
+		neuesspiel = new JButton("Neues Spiel");
+		neuesspiel.setActionCommand("newgame");
 		/* Button ist nur aktiv wenn das Spiel gewonnen / verloren wurde */
 		neuesspiel.setEnabled(false);
 		neuesspiel.addActionListener(new ListenerToolbar());
@@ -91,7 +97,44 @@ public class Toolbar extends JToolBar {
         
 		/* Bestenliste */
 		bestenliste = new JButton("Bestenlist");
-		this.add(bestenliste);		
+		bestenliste.setActionCommand("bestenliste");
+		bestenliste.addActionListener(new ListenerToolbar());
+		this.add(bestenliste);
+	}
+	
+	/**
+	 * Zeige Bestenliste an
+	 */
+	public void showBestenliste(){
+	
+		/* Spaltenname der Bestenlistetabelle */
+		String[] columnNames = {"Spielername", "Punkte", "Rang"};
+		JFrame frameBestenliste = new JFrame("Bestenliste");
+		String [] StringArrHighscore = null;
+		
+		// Auslesen der Bestenliste
+		try{
+			StringArrHighscore = HighScoreFile.getInstance().readFromHighscore();
+		} catch (IOException ex) {
+		    System.err.println("Highscoredatei kann nicht gelesen werden: " + ex);
+		}
+		
+		// 2-dimensoniales Array das der JTable uebergeben wird
+		String [][] arr_list2d = new String [10][3];
+		int entrycounter = 0;
+		for (int i = 0; i < 10; i++) { // fuellen des 2D-Arrays
+		    for(int k = 0; k < 2; k++) {
+		        arr_list2d[i][k] = StringArrHighscore[entrycounter];
+		        entrycounter++;
+		    }
+		    arr_list2d[i][2] = String.valueOf(i+1);
+		}
+		/* lege Tabelle an */
+		JTable table = new JTable(arr_list2d, columnNames);
+		frameBestenliste.add(new JScrollPane(table));
+		frameBestenliste.setLocationRelativeTo(hauptfenster);
+		frameBestenliste.setSize(300,300);
+		frameBestenliste.setVisible(true);    
 	}
 	
 

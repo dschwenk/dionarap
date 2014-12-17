@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 
 
 /**
@@ -24,15 +25,25 @@ public class ListenerToolbar implements ActionListener {
 		JButton button = (JButton) e.getSource();
 		Hauptfenster hauptfenster = (Hauptfenster) button.getTopLevelAncestor();
 		
-		/* neues Spiel -> Model und Controller neu initialisieren + Spielfeld neu darstellen */
-		hauptfenster.initializeDionaRapMC();
+		/* neues Spiel */
+		if(button.getActionCommand() == "newgame"){
+			/* neues Spiel -> Model und Controller neu initialisieren + Spielfeld neu darstellen */
+			hauptfenster.initializeDionaRapMC();
+			
+			/* Button neues Spiel deaktivieren, Punktestand + Fortschritt zuruecksetzen */
+			hauptfenster.getToolbar().setButtonNSDisabled();
+			hauptfenster.getToolbar().setScoreFieldText(0);
+			hauptfenster.getToolbar().setProgressBarValue(0);		
+			System.out.println("Toolbar " + button.getActionCommand());
+			
+			hauptfenster.requestFocus();
+		}
 		
-		/* Button neues Spiel deaktivieren, Punktestand + Fortschritt zuruecksetzen */
-		hauptfenster.getToolbar().setButtonNSDisabled();
-		hauptfenster.getToolbar().setScoreFieldText(0);
-		hauptfenster.getToolbar().setProgressBarValue(0);		
-		System.out.println("Toolbar " + button.getActionCommand());
-		
-		hauptfenster.requestFocus();
+		/* Bestenliste */
+		else if(button.getActionCommand() == "bestenliste"){
+			hauptfenster.getToolbar().showBestenliste();
+			hauptfenster.requestFocus();
+			System.out.println("Toolbar " + button.getActionCommand());
+		}
 	}
 }

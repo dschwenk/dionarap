@@ -1,5 +1,6 @@
 package dionarap;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -33,7 +34,6 @@ public class ListenerMaus extends MouseAdapter implements ActionListener {
     private JMenuItem dracula;
     private JMenuItem spaceWars;
     private JMenuItem squareHead;
-
 
     private String gamedirctory = Hauptfenster.getGameDirectory();
     private String separator = System.getProperty("file.separator");
