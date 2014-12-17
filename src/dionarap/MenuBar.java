@@ -16,6 +16,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -84,15 +85,8 @@ public class MenuBar extends JMenuBar implements ActionListener {
 		
 		/* Menuleistenelemente */
 		ansicht = new JMenu("Ansicht");
+		konfiguration = new JMenu("Konfiguration");
 		hilfe = new JMenu("Hilfe");
-		konfiguration = new JMenu("Konfiguration");		
-
-		/* Menu Hilfe */
-		
-		// Spielbeschreibung - MenuItem, Listener, hinzufuegen
-		spielbeschreibung = new JMenuItem("Spielbeschreibung");
-		spielbeschreibung.addActionListener(this);
-		hilfe.add(spielbeschreibung);		
 		
 		/* Menu Ansicht */
 		
@@ -113,12 +107,14 @@ public class MenuBar extends JMenuBar implements ActionListener {
 		/* deaktivieren da Toolbar standardmaessig oben */
 		toolbartop.setEnabled(false);
 		ansicht.add(toolbarposition);
-
+		ansicht.add(new JSeparator());
+		
 		// Navigator anzeigen
 		navigatoranzeigen = new JCheckBoxMenuItem("Navigator anzeigen");
 		navigatoranzeigen.setState(true);
 		navigatoranzeigen.addActionListener(this);
 		ansicht.add(navigatoranzeigen);
+		ansicht.add(new JSeparator());
 		
 		// Look and Feel
 		lookandfeelmenu = new JMenu("Look and Feel");
@@ -147,11 +143,19 @@ public class MenuBar extends JMenuBar implements ActionListener {
 		leveleinlesen = new JMenuItem("Level einlesen");
 		leveleinlesen.addActionListener(this);
 		konfiguration.add(leveleinlesen);
+		konfiguration.add(new JSeparator());
 		// Spieleinstellungen - MenuItem, Listener, deaktivieren, hinzufuegen
 		spieleinstellungen = new JMenuItem("Spieleinstellungen");
 		spieleinstellungen.addActionListener(this);
 		spieleinstellungen.setEnabled(false);
 		konfiguration.add(spieleinstellungen);		
+		
+		/* Menu Hilfe */
+		
+		// Spielbeschreibung - MenuItem, Listener, hinzufuegen
+		spielbeschreibung = new JMenuItem("Spielbeschreibung");
+		spielbeschreibung.addActionListener(this);
+		hilfe.add(spielbeschreibung);	
 		
 		/* JMenus zur Menuleiste hinzufuegen */
 		this.add(ansicht);

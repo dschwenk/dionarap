@@ -28,12 +28,16 @@ public class Spielfeld extends JPanel {
 	/* The serializable class Spielfeld does not declare a static final serialVersionUID field of type long */
 	private static final long serialVersionUID = 1L;
 	
+	private Hauptfenster hauptfenster;
 	
 	/* Array mit Schachbrettfeldern, Zeilen x Spalten */
 	private JLabel[][] Schachbrett;
 	
     // gibt die Anzahl der Felder in x- / y-Richtung an
-    static final int size_spielfeld = 10;	
+    static final int size_spielfeld = 10;
+    
+    /* Theme */
+    private static String theme = "Dracula";
 
 	/* Icons */
 	private ImageIcon iconAmmo;
@@ -58,7 +62,9 @@ public class Spielfeld extends JPanel {
 	 * Konstruktor des Spielfelds vom Type <code>JPanel</code>
 	 * Erstellt ein Spielfeld / Schachbrett mit x * x Feldern
 	 */		
-	public Spielfeld(){
+	public Spielfeld(Hauptfenster hauptfenster){
+		
+		this.hauptfenster = hauptfenster;
 		
 		/* GridLayout festlegen */
 		this.setLayout(new GridLayout(size_spielfeld,size_spielfeld));
@@ -83,7 +89,7 @@ public class Spielfeld extends JPanel {
 				/* Label mit Groesse 50x50 anlegen */
 				this.Schachbrett[zeile][spalte] = new JLabel();
 				this.Schachbrett[zeile][spalte].setPreferredSize(new Dimension(50,50));
-				
+
 				 /* Spielfelder einfaerben -  berechne mit Modolu ob Spielfeld schwarz oder weiss */
 				if((zeile % 2) == 0){
 					if((spalte % 2) == 0){
@@ -104,6 +110,8 @@ public class Spielfeld extends JPanel {
 				
 				/* Label deckend darstellen */
 				this.Schachbrett[zeile][spalte].setOpaque(true);
+				/* Listener registrieren */
+				this.Schachbrett[zeile][spalte].addMouseListener(new ListenerMaus(hauptfenster));				
 				/* Label zum Panel hinzufuegen */
 				this.add(this.Schachbrett[zeile][spalte]);
 			}
@@ -117,7 +125,7 @@ public class Spielfeld extends JPanel {
 	 */
 	private void setIcons(){
 		// String mit Pfad zu Icons
-		String pathIcons = "icons"+File.separator+"Dracula"+File.separator;
+		String pathIcons = "icons"+File.separator+theme+File.separator;
 
 		iconAmmo = new ImageIcon(pathIcons+"ammo.gif");
 		iconDestruction = new ImageIcon(pathIcons+"destruction.gif");
@@ -239,4 +247,39 @@ public class Spielfeld extends JPanel {
 			this.Schachbrett[spieler.getY()][spieler.getX()].setIcon(iconPlayer);
 		}
 	}
+	
+	
+	/**
+	 * Setzt das Theme
+	 * @param String theme
+	 */
+	public void setTheme(String theme){
+		this.theme = theme;
+		this.setIcons();
+		this.clearGame();
+		this.paintPawns(hauptfenster.getPawns());
+	}
+	
+	
+	/**
+	 *Gibt das Theme zurueck
+	 * @return String theme 
+	 */
+	public String getTheme(){
+		return this.theme;
+	}
+	
+	/**
+	 * Gibt die Spielfeldgroesse zurueck
+	 */
+	public int getSpielfeldSize(){
+		return Spielfeld.size_spielfeld;
+	}
+	
+	/**
+	 * Gibt das Spielfeld zurueck
+	 */
+	public JLabel[][] getSpielfeldArray(){
+		return this.Schachbrett;
+	}	
 }

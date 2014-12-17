@@ -27,16 +27,10 @@ public class Hauptfenster extends JFrame {
 	/* Titel */
 	private static String titel = "DionaRap";
 	
-	/* Spielfeld */
+	/* GUI-Elemente */
 	private Spielfeld spielfeld;
-		
-	/* Toolbar */
 	private Toolbar toolbar;
-	
-	/* Menuleiste */
 	private MenuBar menubar;
-	
-	/* Navigator */
 	private Navigator navigator;	
 	
 	/* Model + Controller */
@@ -46,7 +40,6 @@ public class Hauptfenster extends JFrame {
     // Multithreading-Konfiguration
     private static MTConfiguration MTConf = new MTConfiguration();
 	
-
 	
 	/**
 	 * Konstruktor von <code>Hauptfenster</code>
@@ -61,7 +54,7 @@ public class Hauptfenster extends JFrame {
 		this.setLayout(new BorderLayout());
 		
 		/* erzeuge Spielfeld und fuege dieses zum Hauptfenster hinzu */
-		this.spielfeld = new Spielfeld();
+		this.spielfeld = new Spielfeld(this);
 		this.add(spielfeld);
 		
 		/* initialisiere DionaRap Model + Controller */
@@ -81,9 +74,10 @@ public class Hauptfenster extends JFrame {
 		/* Menuleiste hinzufuegen */
 		this.setJMenuBar(menubar = new MenuBar(this));
 		
-		/* Listener fuer Bewegung des Fensters + Tastendruck  */
+		/* Listener fuer Bewegung des Fensters, Tastendruck, Mausklick  */
 		this.addComponentListener(new ListenerFenster(navigator));
 		this.addKeyListener(new ListenerKeyEvents());
+		this.addMouseListener(new ListenerMaus(this));
 		
 		/* sichtbar machen */
 		this.setVisible(true);
