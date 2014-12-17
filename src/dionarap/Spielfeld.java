@@ -21,7 +21,7 @@ import de.fhwgt.dionarap.model.objects.Vortex;
  * Klasse realisiert das Spielfeld, abgeleitet von <code>JPanel</code>
  * 
  * @author Daniel Schwenk
- * @version Aufgabe 4
+ * @version Aufgabe 5
  */
 public class Spielfeld extends JPanel {
 

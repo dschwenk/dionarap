@@ -14,7 +14,7 @@ import javax.swing.JToolBar;
  * Klasse realisiert die Toolbar, abgeleitet von <code>JToolBar</code>
  * 
  * @author Daniel Schwenk
- * @version Aufgabe 4
+ * @version Aufgabe 5
  */
 public class Toolbar extends JToolBar {
 	
@@ -128,5 +128,20 @@ public class Toolbar extends JToolBar {
 	 */
 	public void setProgressBarValue(int progress) {
 		fortschrittsbalken.setValue(progress);
-	}    
+	}
+	
+	/**
+	 * Methode macht die Toolbar sichtbar
+	 */
+	public void showToolbar(){
+		this.setVisible(true);
+	}
+	
+	/**
+	 * Methode macht die Toolbar unsichtbar
+	 */
+	public void hideToolbar(){
+		this.setVisible(false);
+	}
+	
 }

@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import de.fhwgt.dionarap.model.data.DionaRapModel;
+import de.fhwgt.dionarap.model.data.MTConfiguration;
 import de.fhwgt.dionarap.model.objects.AbstractPawn;
 import de.fhwgt.dionarap.model.objects.Player;
 import de.fhwgt.dionarap.controller.DionaRapController;
@@ -16,7 +17,7 @@ import de.fhwgt.dionarap.controller.DionaRapController;
  * Hauptfenster von DionaRap. Enthält die main()-Methode.
  * 
  * @author Daniel Schwenk
- * @version Aufgabe 4
+ * @version Aufgabe 5
  */
 public class Hauptfenster extends JFrame {
 	
@@ -32,9 +33,18 @@ public class Hauptfenster extends JFrame {
 	/* Toolbar */
 	private Toolbar toolbar;
 	
+	/* Menuleiste */
+	private MenuBar menubar;
+	
+	/* Navigator */
+	private Navigator navigator;	
+	
 	/* Model + Controller */
 	private DionaRapModel DionaRap_Model;
-	private DionaRapController DionaRap_Controller;	
+	private DionaRapController DionaRap_Controller;
+	
+    // Multithreading-Konfiguration
+    private static MTConfiguration MTConf = new MTConfiguration();
 	
 
 	
@@ -62,11 +72,14 @@ public class Hauptfenster extends JFrame {
 		this.setLocationRelativeTo(null);
 		
 		/* Navigator hinzufuegen */
-		Navigator navigator = new Navigator(this);
+		this.navigator = new Navigator(this);
 		
 		/* Toolbar hinzufuegen */
 		toolbar = new Toolbar(this);
 		this.add(toolbar, BorderLayout.NORTH);
+		
+		/* Menuleiste hinzufuegen */
+		this.setJMenuBar(menubar = new MenuBar(this));
 		
 		/* Listener fuer Bewegung des Fensters + Tastendruck  */
 		this.addComponentListener(new ListenerFenster(navigator));
@@ -120,8 +133,27 @@ public class Hauptfenster extends JFrame {
 		
 		/* Initialisierung Controller */
 		this.DionaRap_Controller = new DionaRapController(DionaRap_Model);
+		
+		/* Multithreading Konfiguraiton initialisieren und aktivieren */
+		this.initializeMTConfiguration();
+		DionaRap_Controller.setMultiThreaded(MTConf);
 	}
 	
+	/**
+	 * Initialisiert die Multithreading-Einstellungen
+	 */
+	private void initializeMTConfiguration(){
+		MTConf.setAlgorithmAStarActive(true);
+		MTConf.setAvoidCollisionWithObstacles(true);
+		MTConf.setAvoidCollisionWithOpponent(true);
+		MTConf.setMinimumTime(800);
+		MTConf.setShotGetsOwnThread(true);
+		MTConf.setOpponentStartWaitTime(5000);
+		MTConf.setShotWaitTime(300);
+		MTConf.setRandomOpponentWaitTime(false);
+		MTConf.setOpponentWaitTime(1500);
+		MTConf.setDynamicOpponentWaitTime(false);
+	}
 	
 	/**
 	 * Methode zur Darstellung des Dialogs fuer die Anzeige der
@@ -164,6 +196,26 @@ public class Hauptfenster extends JFrame {
 		}
 		else {
 			this.getToolbar().setButtonNSEnabled();
+		}
+	}
+
+
+	/**
+	 * Methode um die Toolbar zu positionieren
+	 * @param top zeige Toolbar oben (true) oder unten an (false)
+	 */
+	public void setToolbarPosition(boolean top){
+		/* Toolbar oben anzeigen */
+		if(top){
+			this.remove(toolbar);
+			this.add(toolbar, BorderLayout.NORTH);
+			this.pack();
+		}
+		/* Toolbar unten anzeigen */
+		else {
+			this.remove(toolbar);
+			this.add(toolbar, BorderLayout.SOUTH);
+			this.pack();			
 		}
 	}
 	
@@ -209,6 +261,31 @@ public class Hauptfenster extends JFrame {
 	}
 	
 	/**
+	 * Gibt Spielfeld zurueck. 
+	 * @return Spielfeld
+	 */
+	public Spielfeld getSpielfeld(){
+		return this.spielfeld;
+	}
+	
+	/**
+	 * Gibt Navigator zurueck. 
+	 * @return Navigator
+	 */
+	public Navigator getNavigator(){
+		return this.navigator;
+	}	
+	
+
+	/**
+	 * Gibt Multithreading Konfiguration zurueck. 
+	 * @return MTConf
+	 */
+	public MTConfiguration getMTConfiguration(){
+		return Hauptfenster.MTConf;
+	}		
+	
+	/**
 	 * Gibt den aktuellen Spielfortschritt zurueck
 	 * @return int progress
 	 */
@@ -217,5 +294,15 @@ public class Hauptfenster extends JFrame {
 		// Standard 4 Gegner --> TODO 4 durch Konstante / Variable ersetzen
 		float progress = ((4 - (float)DionaRap_Model.getOpponentCount()) / 4) * 100;
 		return (int)progress;
+	}
+	
+	/**
+	 * Gibt das Spielverzeichnis zurueck
+	 * @return String spieleverzeichnis
+	 */
+	public static String getGameDirectory(){
+		String gamedirectory = System.getProperty("user.dir");
+		String separator = System.getProperty("file.separator");
+		return (gamedirectory + separator);
 	}
 }
