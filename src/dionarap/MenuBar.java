@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JDialog;
@@ -72,7 +73,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
     
     // Hilfe Elemente
     private JMenuItem spielbeschreibung;
-    private URL url;    
+
 
     
 	/**
@@ -255,46 +256,27 @@ public class MenuBar extends JMenuBar implements ActionListener {
 			filechooser.setFileFilter(new XMLExtensionFileFilter("XML", new String[]{"xml"}));
 			int returnvalue = filechooser.showOpenDialog(hauptfenster);
 			if(returnvalue == JFileChooser.APPROVE_OPTION){
-				/* lösche die Icons vom Spielfeld */
-				hauptfenster.getSpielfeld().clearGame();
+				/* lösche die Labels vom Spielfeld */
+				hauptfenster.getSpielfeld().removeSpielfeldLabels();
 				/* starte Levelreader (erwartet Instanz der DionaRap Models + MTConfiguration) und uebergebe ausgewaehlte Datei */
 				LevelReader levelreader = new LevelReader(hauptfenster.getMTConfiguration(), hauptfenster.getDionaRapModel());
 				levelreader.readLevel(filechooser.getSelectedFile().toString());
-				// TODO
+				/* neues Spielfeld + zeichne Icons */ 
+				hauptfenster.getSpielfeld().addLabelsToSchachbrett();
+				hauptfenster.getSpielfeld().repaintPawns();
+				
+				// TODO				
+				
+				hauptfenster.pack();
+				/* Navigtor neu positionieren */
+				hauptfenster.getNavigator().setNavPosition();
 			}
 		}
 		
 		/* anzeigen der Spielbeschreibung */
 		if(e.getSource() == spielbeschreibung){
-			String gamedirectory = Hauptfenster.getGameDirectory();
-			String separator = System.getProperty("file.separator");
-			JDialog spielbeschreibungDialog = new JDialog(hauptfenster,"Spielbeschreibung",true);
-            JEditorPane editorPane = new JEditorPane();
-            editorPane.setEditable(false);
-            /* URL Objekt erstellen */
-            try {
-                url = new URL("file://" + gamedirectory + "html" + separator + "spielbeschreibung.html");
-            }
-            catch (MalformedURLException ex) {
-                System.err.println("File kann nicht gelesen werden: " + url);
-            }
-            /* zeige Seite an */
-            try {
-                editorPane.setPage(url);
-            }
-            catch (IOException ex) {
-                System.err.println("File kann nicht gelesen werden: " + url);
-            }
-            /* Scrollbalken einfuegen */
-            JScrollPane editorScrollPane = new JScrollPane(editorPane);
-            editorScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-            spielbeschreibungDialog.add(editorScrollPane);
-            /* Groese, Ausrichtung + anzeigen */
-            spielbeschreibungDialog.setSize(700, 500);
-            spielbeschreibungDialog.setLocationRelativeTo(hauptfenster);
-            spielbeschreibungDialog.setVisible(true);            
-		}
-		
+				new Spielebeschreibung(hauptfenster);
+		}		
 	}
 
 }

@@ -28,7 +28,7 @@ public class ListenerToolbar implements ActionListener {
 		/* neues Spiel */
 		if(button.getActionCommand() == "newgame"){
 			/* neues Spiel -> Model und Controller neu initialisieren + Spielfeld neu darstellen */
-			hauptfenster.initializeDionaRapMC();
+			hauptfenster.initializeDionaRap();
 			
 			/* Button neues Spiel deaktivieren, Punktestand + Fortschritt zuruecksetzen */
 			hauptfenster.getToolbar().setButtonNSDisabled();

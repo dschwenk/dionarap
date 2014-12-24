@@ -47,12 +47,12 @@ public class ListenerMaus extends MouseAdapter implements ActionListener {
     	this.hauptfenster = hauptfenster;
     	popupMenu = new JPopupMenu("Thema");
     	/* fuege Eintraege zum Menu hinzu */
-        popupMenu.add(dracula = new JMenuItem("Dracula", (Icon) new ImageIcon(gamedirctory + "icons" + separator + "Dracula" + separator + "popup.gif")));
+        popupMenu.add(dracula = new JMenuItem("Dracula", (Icon) new ImageIcon(gamedirctory + "icons" + separator + "Dracula" + separator + "player.gif")));
         dracula.setEnabled(false);
         dracula.addActionListener(this);
-        popupMenu.add(spaceWars = new JMenuItem("SpaceWars", (Icon) new ImageIcon(gamedirctory + "icons" + separator + "SpaceWars" + separator + "popup.gif")));
+        popupMenu.add(spaceWars = new JMenuItem("SpaceWars", (Icon) new ImageIcon(gamedirctory + "icons" + separator + "SpaceWars" + separator + "player1.gif")));
         spaceWars.addActionListener(this);
-        popupMenu.add(squareHead = new JMenuItem("SquareHead", (Icon) new ImageIcon(gamedirctory + "icons" + separator + "SquareHead" + separator + "popup.gif")));
+        popupMenu.add(squareHead = new JMenuItem("SquareHead", (Icon) new ImageIcon(gamedirctory + "icons" + separator + "SquareHead" + separator + "player.gif")));
         squareHead.addActionListener(this);
     }    
 
@@ -98,8 +98,8 @@ public class ListenerMaus extends MouseAdapter implements ActionListener {
 		/* Linksklick */
 		else if(e.getButton() == 1){
 			/* Groesse Spielfeld */
-			int size_x = hauptfenster.getSpielfeld().getSpielfeldSize();
-			int size_y = hauptfenster.getSpielfeld().getSpielfeldSize();
+			int size_x = hauptfenster.getSpielfeld().getSpielfeldSizeX();
+			int size_y = hauptfenster.getSpielfeld().getSpielfeldSizeY();
 			/* lege Spielfeld an */
 			labelArray = new JLabel[size_x][size_y];
 			labelArray = hauptfenster.getSpielfeld().getSpielfeldArray();

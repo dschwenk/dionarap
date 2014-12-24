@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import de.fhwgt.dionarap.model.data.DionaRapModel;
+import de.fhwgt.dionarap.model.data.Grid;
 import de.fhwgt.dionarap.model.data.MTConfiguration;
 import de.fhwgt.dionarap.model.objects.AbstractPawn;
 import de.fhwgt.dionarap.model.objects.Player;
@@ -27,8 +28,12 @@ public class Hauptfenster extends JFrame {
 	/* Titel */
 	private static String titel = "DionaRap";
 	
-	/* GUI-Elemente */
+	/* Spielfeld */
 	private Spielfeld spielfeld;
+	private static int x = 10;
+	private static int y = 10;
+	private Grid grid = new Grid(y,x);
+	
 	private Toolbar toolbar;
 	private MenuBar menubar;
 	private Navigator navigator;	
@@ -37,9 +42,10 @@ public class Hauptfenster extends JFrame {
 	private DionaRapModel DionaRap_Model;
 	private DionaRapController DionaRap_Controller;
 	
-    // Multithreading-Konfiguration
+    /* Multithreading-Konfiguration */
     private static MTConfiguration MTConf = new MTConfiguration();
-	
+    /* Flag ob Spieleinstellungen angepasst wurden */
+	private boolean game_settings_changed = false;
 	
 	/**
 	 * Konstruktor von <code>Hauptfenster</code>
@@ -53,12 +59,10 @@ public class Hauptfenster extends JFrame {
 		this.setResizable(false);
 		this.setLayout(new BorderLayout());
 		
-		/* erzeuge Spielfeld und fuege dieses zum Hauptfenster hinzu */
-		this.spielfeld = new Spielfeld(this);
-		this.add(spielfeld);
+
 		
 		/* initialisiere DionaRap Model + Controller */
-		this.initializeDionaRapMC();
+		this.initializeDionaRap();
 		
 		/* Groesse optimieren und Hauptfenster in Bildschirmmitte platzieren */
 		this.pack();
@@ -101,7 +105,7 @@ public class Hauptfenster extends JFrame {
 	 */
 	public void setSpielfeldElements(){
 		/* entferne zuerst alle Elemente vom Spielfeld*/
-		this.spielfeld.clearGame();
+		this.spielfeld.removeIconsFromSpielfeld();
 		/* frage alle Spielfiguren vom DionaRapModel ab und fuelle Array damit */
 		AbstractPawn[] DionaRap_Pawns = this.DionaRap_Model.getAllPawns();
 		/* setze alle Spielfiguren auf das Spielfeld */
@@ -113,15 +117,19 @@ public class Hauptfenster extends JFrame {
 	 * Initialisiert die Spielelogik (DionaRap Model und Controller), registriert
 	 * den Listener fuer das Model und platziert die Figuren auf dem Spielfeld
 	 */
-	public void initializeDionaRapMC(){
+	public void initializeDionaRap(){
+		
 		/* Initialisierung Model */
 		// Defaultkonstruktor Initialisiert eine Spielfeldgroesse von 10x10 mit 4 Gegnern und 4 Hindernissen
 		// (int gridSizeY, int gridSizeX, int opponentCount, int obstacleCount) 
-		this.DionaRap_Model = new DionaRapModel();
+		this.DionaRap_Model = new DionaRapModel(this.grid.getGridSizeY(),this.grid.getGridSizeX(),4,4);
 
 		/* Listener fuer das Model registrieren */
 		DionaRap_Model.addModelChangedEventListener(new ListenerModel(this,spielfeld));		
 		
+		/* erzeuge Spielfeld und fuege dieses zum Hauptfenster hinzu */
+		this.spielfeld = new Spielfeld(this);
+		this.add(spielfeld);
 		/* platziere Figuren auf Spielfeld */
 		this.setSpielfeldElements();
 		
@@ -129,7 +137,9 @@ public class Hauptfenster extends JFrame {
 		this.DionaRap_Controller = new DionaRapController(DionaRap_Model);
 		
 		/* Multithreading Konfiguraiton initialisieren und aktivieren */
-		this.initializeMTConfiguration();
+		if(game_settings_changed == false){
+			this.initializeMTConfiguration();
+		}
 		DionaRap_Controller.setMultiThreaded(MTConf);
 	}
 	
@@ -182,7 +192,7 @@ public class Hauptfenster extends JFrame {
 		/* Werte gedrueckten Dialogbutton aus */
 		if(playerchoice == 0){
 			/* neues Spiel -> Model und Controller neu initialisieren + Spielfeld neu darstellen */
-			this.initializeDionaRapMC();
+			this.initializeDionaRap();
 			/* Button "Neues Spiel" deaktivieren, Spielstand / Fortschritt zuruecksetzen */
 			this.getToolbar().setButtonNSDisabled();
 			this.getToolbar().setScoreFieldText(0);

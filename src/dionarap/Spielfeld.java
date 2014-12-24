@@ -34,10 +34,11 @@ public class Spielfeld extends JPanel {
 	private JLabel[][] Schachbrett;
 	
     // gibt die Anzahl der Felder in x- / y-Richtung an
-    static final int size_spielfeld = 10;
+    private int size_spielfeld_x = 12;
+	private int size_spielfeld_y = 12;
     
-    /* Theme */
-    private static String theme = "Dracula";
+    /* Theme beim Spielstart */
+    private String theme = "Dracula";
 
 	/* Icons */
 	private ImageIcon iconAmmo;
@@ -60,18 +61,14 @@ public class Spielfeld extends JPanel {
 	
 	/**
 	 * Konstruktor des Spielfelds vom Type <code>JPanel</code>
-	 * Erstellt ein Spielfeld / Schachbrett mit x * x Feldern
+	 * Erstellt ein Spielfeld / Schachbrett mit x * y Feldern
 	 */		
 	public Spielfeld(Hauptfenster hauptfenster){
 		
-		this.hauptfenster = hauptfenster;
-		
-		/* GridLayout festlegen */
-		this.setLayout(new GridLayout(size_spielfeld,size_spielfeld));
+		this.hauptfenster = hauptfenster;		
 
 		/* Array fuer Schachbrett erzeugen und Felder hinzufuegen */
-		this.Schachbrett = new JLabel[size_spielfeld][size_spielfeld];
-		this.addLabelsToSchachbrett(size_spielfeld);
+		this.addLabelsToSchachbrett();
 
 		/* setze Spielfiguricons */
 		this.setIcons();
@@ -83,9 +80,14 @@ public class Spielfeld extends JPanel {
 	 * Fuegt Spielfelder zum Spielfeld hinzu
 	 * @param size_spielfeld Groesse des Spielfelds
 	 */	
-	private void addLabelsToSchachbrett(int size_spielfeld){
-		for(int zeile=0;zeile < size_spielfeld;zeile++){
-			for(int spalte=0; spalte < size_spielfeld;spalte++){
+	public void addLabelsToSchachbrett(){
+		int size_x = hauptfenster.getDionaRapModel().getGrid().getGridSizeX();
+		int size_y = hauptfenster.getDionaRapModel().getGrid().getGridSizeY();
+		this.setLayout(new GridLayout(size_y, size_x));
+		this.Schachbrett = new JLabel[size_y][size_x];
+		
+		for(int zeile=0;zeile < size_y;zeile++){
+			for(int spalte=0; spalte < size_x;spalte++){
 				/* Label mit Groesse 50x50 anlegen */
 				this.Schachbrett[zeile][spalte] = new JLabel();
 				this.Schachbrett[zeile][spalte].setPreferredSize(new Dimension(50,50));
@@ -146,19 +148,44 @@ public class Spielfeld extends JPanel {
 	}	
 
 
+	/**
+	 * Loescht die Icons vom Spielfeld und zeichnet diese neu
+	 */
+	public void repaintPawns(){
+		this.removeIconsFromSpielfeld();
+		this.paintPawns(hauptfenster.getPawns());
+	}
+	
 
 	/**
 	 * Löscht die Icons vom Spielfeld
 	 */
-	public void clearGame(){
+	public void removeIconsFromSpielfeld(){
+		int size_x = hauptfenster.getDionaRapModel().getGrid().getGridSizeX();
+		int size_y = hauptfenster.getDionaRapModel().getGrid().getGridSizeY();		
 		/* gehe Felder nacheinander durch */
-		for(int zeile = 0; zeile < size_spielfeld; zeile++){		
-			for(int spalte = 0; spalte < size_spielfeld; spalte++){
+		for(int zeile = 0; zeile < size_y; zeile++){		
+			for(int spalte = 0; spalte < size_x; spalte++){
 				/* entferne Icon -> setze null */
 				this.Schachbrett[zeile][spalte].setIcon(null);
 			}			
 		}
 	}
+	
+	/**
+	 * Löscht die Lables vom Spielfeld
+	 */
+	public void removeSpielfeldLabels(){
+		int size_x = hauptfenster.getDionaRapModel().getGrid().getGridSizeX();
+		int size_y = hauptfenster.getDionaRapModel().getGrid().getGridSizeY();		
+		/* gehe Felder nacheinander durch */
+		for(int zeile = 0; zeile < size_y; zeile++){		
+			for(int spalte = 0; spalte < size_x; spalte++){
+				/* entferne Icon -> setze null */
+				this.remove(Schachbrett[zeile][spalte]);
+			}			
+		}
+	}	
 
 
 
@@ -256,7 +283,7 @@ public class Spielfeld extends JPanel {
 	public void setTheme(String theme){
 		this.theme = theme;
 		this.setIcons();
-		this.clearGame();
+		this.removeIconsFromSpielfeld();
 		this.paintPawns(hauptfenster.getPawns());
 	}
 	
@@ -270,11 +297,18 @@ public class Spielfeld extends JPanel {
 	}
 	
 	/**
-	 * Gibt die Spielfeldgroesse zurueck
+	 * Gibt die Spielfeldgroesse in X-Richtung zurueck
 	 */
-	public int getSpielfeldSize(){
-		return Spielfeld.size_spielfeld;
+	public int getSpielfeldSizeX(){
+		return this.size_spielfeld_x;
 	}
+	
+	/**
+	 * Gibt die Spielfeldgroesse in Y-Richtung zurueck
+	 */
+	public int getSpielfeldSizeY(){
+		return this.size_spielfeld_y;
+	}	
 	
 	/**
 	 * Gibt das Spielfeld zurueck
