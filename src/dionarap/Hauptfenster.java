@@ -33,6 +33,8 @@ public class Hauptfenster extends JFrame {
 	private static int x = 10;
 	private static int y = 10;
 	private Grid grid = new Grid(y,x);
+	private int opponents = 4;
+	private int obstacles = 4;
 	
 	private Toolbar toolbar;
 	private MenuBar menubar;
@@ -58,8 +60,6 @@ public class Hauptfenster extends JFrame {
 		this.setTitle(titel);
 		this.setResizable(false);
 		this.setLayout(new BorderLayout());
-		
-
 		
 		/* initialisiere DionaRap Model + Controller */
 		this.initializeDionaRap();
@@ -122,16 +122,20 @@ public class Hauptfenster extends JFrame {
 		/* Initialisierung Model */
 		// Defaultkonstruktor Initialisiert eine Spielfeldgroesse von 10x10 mit 4 Gegnern und 4 Hindernissen
 		// (int gridSizeY, int gridSizeX, int opponentCount, int obstacleCount) 
-		this.DionaRap_Model = new DionaRapModel(this.grid.getGridSizeY(),this.grid.getGridSizeX(),4,4);
+		this.DionaRap_Model = new DionaRapModel(grid.getGridSizeY(),grid.getGridSizeX(),opponents,obstacles);
+
+		/* erzeuge Spielfeld und fuege dieses zum Hauptfenster hinzu */
+		if(spielfeld != null){
+			this.remove(spielfeld);			
+		}
+		this.spielfeld = new Spielfeld(this);
+		this.add(spielfeld, BorderLayout.CENTER);
 
 		/* Listener fuer das Model registrieren */
-		DionaRap_Model.addModelChangedEventListener(new ListenerModel(this,spielfeld));		
+		DionaRap_Model.addModelChangedEventListener(new ListenerModel(this,spielfeld));	
 		
-		/* erzeuge Spielfeld und fuege dieses zum Hauptfenster hinzu */
-		this.spielfeld = new Spielfeld(this);
-		this.add(spielfeld);
 		/* platziere Figuren auf Spielfeld */
-		this.setSpielfeldElements();
+		this.setSpielfeldElements();	
 		
 		/* Initialisierung Controller */
 		this.DionaRap_Controller = new DionaRapController(DionaRap_Model);
@@ -164,8 +168,10 @@ public class Hauptfenster extends JFrame {
 	 * Spielergebnisse ("Game Over" und "Gewonnen")
 	 */
 	public void drawGameResultDialog(boolean game_lost){
+		this.requestFocus();
 		/* Gewonnen / Verloren Icons, Ausgabestrings, Dialogrueckgabewert */
-		String path_icons = "icons"+File.separator+"Dracula"+File.separator;
+		String theme = this.getSpielfeld().getTheme();
+		String path_icons = "icons"+File.separator+theme+File.separator;
 		ImageIcon gameover = new ImageIcon(path_icons + "gameover.gif");
 		ImageIcon win = new ImageIcon(path_icons + "win.gif");		
 		int playerchoice;
@@ -295,8 +301,7 @@ public class Hauptfenster extends JFrame {
 	 */
 	public int getGameProgress(){
 		// Berechnet die Prozent an restlichen Gegnern
-		// Standard 4 Gegner --> TODO 4 durch Konstante / Variable ersetzen
-		float progress = ((4 - (float)DionaRap_Model.getOpponentCount()) / 4) * 100;
+		float progress = ((opponents - (float)DionaRap_Model.getOpponentCount()) / opponents) * 100;
 		return (int)progress;
 	}
 	

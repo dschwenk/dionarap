@@ -71,7 +71,8 @@ public class ListenerModel implements DionaRapListener {
 		hauptfenster.setSpielfeldElements();
 		hauptfenster.getToolbar().setScoreFieldText(hauptfenster.getDionaRapModel().getScore());
 		hauptfenster.getToolbar().setProgressBarValue(hauptfenster.getGameProgress());
-		spielfeld.gameStatusEnd(hauptfenster.getPlayer(), game_lost);
+		// TODO fix
+		//spielfeld.gameStatusEnd(hauptfenster.getPlayer(), game_lost);
 		
 		/* zeige Gewonnen / Verloren Dialog an */ 
 		hauptfenster.drawGameResultDialog(game_lost);

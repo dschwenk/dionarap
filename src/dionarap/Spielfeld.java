@@ -153,7 +153,7 @@ public class Spielfeld extends JPanel {
 	 */
 	public void repaintPawns(){
 		this.removeIconsFromSpielfeld();
-		this.paintPawns(hauptfenster.getPawns());
+		this.paintPawns(this.hauptfenster.getPawns());
 	}
 	
 
@@ -181,7 +181,6 @@ public class Spielfeld extends JPanel {
 		/* gehe Felder nacheinander durch */
 		for(int zeile = 0; zeile < size_y; zeile++){		
 			for(int spalte = 0; spalte < size_x; spalte++){
-				/* entferne Icon -> setze null */
 				this.remove(Schachbrett[zeile][spalte]);
 			}			
 		}
@@ -195,6 +194,7 @@ public class Spielfeld extends JPanel {
 	 * @param dionaRap_Pawns Spielfigur vom Typ <code>AbstractPawn</code>
 	 */
 	public void paintPawns(AbstractPawn[] dionaRap_Pawns){		
+		System.out.println("paint pawn - length: " + dionaRap_Pawns.length);
 		for(int i=0;i < dionaRap_Pawns.length;i++){
 			/* erfrage Position der Figur */
 			int posX = dionaRap_Pawns[i].getX();

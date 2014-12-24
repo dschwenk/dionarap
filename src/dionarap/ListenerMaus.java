@@ -98,8 +98,8 @@ public class ListenerMaus extends MouseAdapter implements ActionListener {
 		/* Linksklick */
 		else if(e.getButton() == 1){
 			/* Groesse Spielfeld */
-			int size_x = hauptfenster.getSpielfeld().getSpielfeldSizeX();
-			int size_y = hauptfenster.getSpielfeld().getSpielfeldSizeY();
+			int size_x = hauptfenster.getDionaRapModel().getGrid().getGridSizeX();
+			int size_y = hauptfenster.getDionaRapModel().getGrid().getGridSizeY();	
 			/* lege Spielfeld an */
 			labelArray = new JLabel[size_x][size_y];
 			labelArray = hauptfenster.getSpielfeld().getSpielfeldArray();
