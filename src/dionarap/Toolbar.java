@@ -174,15 +174,23 @@ public class Toolbar extends JToolBar {
 				munition.remove(munition_arr[i]);
 				munition.add(munition_arr[i]);
 			}
-			/* Anzahl an Munition <= 3 -> zeige Icons an */
-			if(ammocount <= 3){
+			/* Anzahl an Munition < 0 -> unendlich -> zeige alle Icons an */
+			if(ammocount < 0){
+				for(int i=0;i<3;i++){
+					munition_arr[i].setIcon(icon_munition);
+					munition_arr[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+					munition.add(munition_arr[i]);
+				}
+			}
+			/* Anzahl an Munition <= 3 && >= 0 -> zeige Anzahl x an Icons an */
+			else if(ammocount <= 3 && ammocount >= 0){
 				for(int i=0;i<ammocount;i++){
 					munition_arr[i].setIcon(icon_munition);
 					munition_arr[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 					munition.add(munition_arr[i]);
 				}
 			}
-			/* Anzahl an Munition > 3 -> zeige Zahl + Icons an */
+			/* Anzahl an Munition > 3 -> zeige Zahl + 2 Icons an */
 			else {
 				munition_arr[0].setBorder(null);
 				munition_arr[0].setText("*" + String.valueOf(this.ammoCounter));

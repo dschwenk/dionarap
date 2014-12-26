@@ -40,6 +40,8 @@ public class Spielebeschreibung extends JDialog {
         editorPane.setEditable(false);
         /* URL Objekt erstellen */
         try {
+        	// Windows - file:///
+        	// Linux - file://
             url = new URL("file:///" + gamedirectory + "html" + separator + "spielbeschreibung.html");
         }
         catch (MalformedURLException ex) {
