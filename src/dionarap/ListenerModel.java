@@ -1,5 +1,12 @@
 package dionarap;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 import de.fhwgt.dionarap.model.events.DionaRapChangedEvent;
 import de.fhwgt.dionarap.model.events.GameStatusEvent;
 import de.fhwgt.dionarap.model.listener.DionaRapListener;
@@ -71,7 +78,60 @@ public class ListenerModel implements DionaRapListener {
 		hauptfenster.getToolbar().updateToolbar();
 		spielfeld.gameStatusEnd(hauptfenster.getPlayer(), game_lost);
 		
+		/* in Highscore eintragen */
+		int position = HighScoreFile.SCORE_TO_LOW_FOR_HIGHSCORE;
+		try {
+			position = HighScoreFile.getInstance().getScorePosition(hauptfenster.getDionaRapModel().getScore());
+		}
+		catch(IOException ex){
+			System.err.println("File kann nicht gelesen werden: " + ex);
+		}
+		/* pruefe ob Spieler in Bestenliste kommt */
+		if(position != HighScoreFile.SCORE_TO_LOW_FOR_HIGHSCORE){
+			addPlayerToBestenliste();
+		}
+		
 		/* zeige Gewonnen / Verloren Dialog an */ 
 		hauptfenster.drawGameResultDialog(game_lost);
 	}
+	
+	
+	public void addPlayerToBestenliste(){
+		String theme = hauptfenster.getSpielfeld().getTheme();
+		String pathIcon = "icons"+File.separator+theme+File.separator + "win.gif";
+        String[] choices = {"Eintragen", "Abbrechen"};
+        int position = -1;
+        ImageIcon win = new ImageIcon(pathIcon);
+
+        try{
+            position = HighScoreFile.getInstance().getScorePosition(hauptfenster.getDionaRapModel().getScore());
+        } catch (IOException ex) {
+            System.err.println("File kann nicht gelesen werden: " + ex);
+        }
+
+        JOptionPane optionPane = new JOptionPane();
+        optionPane.setMessage("Sie haben Platz " + position + " der Bestenliste erreicht. \nBitte tragen Sie ihren Namen ein:");
+        optionPane.setMessageType(JOptionPane.PLAIN_MESSAGE);
+        optionPane.setOptionType(JOptionPane.YES_NO_OPTION);
+        optionPane.setIcon(win);
+        optionPane.setWantsInput(true);
+        optionPane.setOptions(choices);
+        JDialog dialog = optionPane.createDialog(hauptfenster, "Eintrag in Bestenliste!");
+        dialog.setVisible(true);
+
+        if(optionPane.getValue().equals("Eintragen")) {
+            String playername;
+            if(optionPane.getInputValue().toString().length() != 0) {
+                playername = optionPane.getInputValue().toString();
+            } else {
+                playername = "NoName";
+            }
+            try{
+                HighScoreFile.getInstance().writeScoreIntoFile(playername, hauptfenster.getDionaRapModel().getScore());
+            } catch (IOException ex) {
+                System.err.println("File kann nicht gelesen werden: " + ex);
+            }
+        }
+	}
+	
 }
