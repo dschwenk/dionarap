@@ -94,21 +94,27 @@ public class ListenerModel implements DionaRapListener {
 		/* zeige Gewonnen / Verloren Dialog an */ 
 		hauptfenster.drawGameResultDialog(game_lost);
 	}
+
 	
-	
+	/**
+	 * Methode zeigt Dialog zum Eintagen in die Bestenliste an und schreibt
+	 * Punkte + Name in Bestenlistendatei
+	 */
 	public void addPlayerToBestenliste(){
 		String theme = hauptfenster.getSpielfeld().getTheme();
 		String pathIcon = "icons"+File.separator+theme+File.separator + "win.gif";
         String[] choices = {"Eintragen", "Abbrechen"};
-        int position = -1;
         ImageIcon win = new ImageIcon(pathIcon);
-
+        int position = -1;
+        
+        /* frage Position ab */
         try{
             position = HighScoreFile.getInstance().getScorePosition(hauptfenster.getDionaRapModel().getScore());
         } catch (IOException ex) {
             System.err.println("File kann nicht gelesen werden: " + ex);
         }
-
+        
+        /* erstelle Dialog */
         JOptionPane optionPane = new JOptionPane();
         optionPane.setMessage("Sie haben Platz " + position + " der Bestenliste erreicht. \nBitte tragen Sie ihren Namen ein:");
         optionPane.setMessageType(JOptionPane.PLAIN_MESSAGE);
@@ -118,20 +124,22 @@ public class ListenerModel implements DionaRapListener {
         optionPane.setOptions(choices);
         JDialog dialog = optionPane.createDialog(hauptfenster, "Eintrag in Bestenliste!");
         dialog.setVisible(true);
-
+        
+        /* Werte Dialog aus */
         if(optionPane.getValue().equals("Eintragen")) {
             String playername;
             if(optionPane.getInputValue().toString().length() != 0) {
                 playername = optionPane.getInputValue().toString();
-            } else {
-                playername = "NoName";
+            } 
+            else {
+                playername = "kein Name";
             }
-            try{
+            /* trage Highscore in Datei ein */
+            try {
                 HighScoreFile.getInstance().writeScoreIntoFile(playername, hauptfenster.getDionaRapModel().getScore());
             } catch (IOException ex) {
                 System.err.println("File kann nicht gelesen werden: " + ex);
             }
         }
-	}
-	
+	}	
 }
