@@ -81,17 +81,18 @@ public class Spielfeld extends JPanel {
 	 * @param size_spielfeld Groesse des Spielfelds
 	 */	
 	public void addLabelsToSchachbrett(){
+		/* Layout + Array fuer Schabrett-Labels */
 		int size_x = hauptfenster.getDionaRapModel().getGrid().getGridSizeX();
 		int size_y = hauptfenster.getDionaRapModel().getGrid().getGridSizeY();
 		this.setLayout(new GridLayout(size_y, size_x));
 		this.Schachbrett = new JLabel[size_y][size_x];
-		
+		/* gehe alle Labels durch */
 		for(int zeile=0;zeile < size_y;zeile++){
 			for(int spalte=0; spalte < size_x;spalte++){
 				/* Label mit Groesse 50x50 anlegen */
 				this.Schachbrett[zeile][spalte] = new JLabel();
 				this.Schachbrett[zeile][spalte].setPreferredSize(new Dimension(50,50));
-
+				
 				 /* Spielfelder einfaerben -  berechne mit Modolu ob Spielfeld schwarz oder weiss */
 				if((zeile % 2) == 0){
 					if((spalte % 2) == 0){
@@ -172,6 +173,7 @@ public class Spielfeld extends JPanel {
 		}
 	}
 	
+
 	/**
 	 * Löscht die Lables vom Spielfeld
 	 */

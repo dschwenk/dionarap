@@ -41,10 +41,9 @@ public class ListenerModel implements DionaRapListener {
 	public void modelChanged(DionaRapChangedEvent e) {
 		/* Spiel laueft */
 		if(game_running){
-			/* Zeichne Figuren neu, setze aktuellen Spielstand / Fortschritt */
+			/* Zeichne Figuren neu, setze aktuellen Spielstand / Fortschritt / Munitionsanzeige */
 			hauptfenster.setSpielfeldElements();
-			hauptfenster.getToolbar().setScoreFieldText(hauptfenster.getDionaRapModel().getScore());
-			hauptfenster.getToolbar().setProgressBarValue(hauptfenster.getGameProgress());
+			hauptfenster.getToolbar().updateToolbar();
 		}
 	}
 
@@ -69,10 +68,8 @@ public class ListenerModel implements DionaRapListener {
 
 		/* setze abschliessend Figuren + spezielle Spielerfigur (Gewinner/Verlierer Spielerfigur) */
 		hauptfenster.setSpielfeldElements();
-		hauptfenster.getToolbar().setScoreFieldText(hauptfenster.getDionaRapModel().getScore());
-		hauptfenster.getToolbar().setProgressBarValue(hauptfenster.getGameProgress());
-		// TODO fix
-		//spielfeld.gameStatusEnd(hauptfenster.getPlayer(), game_lost);
+		hauptfenster.getToolbar().updateToolbar();
+		spielfeld.gameStatusEnd(hauptfenster.getPlayer(), game_lost);
 		
 		/* zeige Gewonnen / Verloren Dialog an */ 
 		hauptfenster.drawGameResultDialog(game_lost);

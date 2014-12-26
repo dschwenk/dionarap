@@ -1,12 +1,17 @@
 package dionarap;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
@@ -28,13 +33,15 @@ public class Toolbar extends JToolBar {
 	Hauptfenster hauptfenster;
 
 	/* Toolbarelemente */
-	JButton neuesspiel;
-	JPanel punktestand;
-	JTextField punktestandtext;
-	JPanel munition;
-	JPanel spielfortschritt;
-	JProgressBar fortschrittsbalken;
-	JButton bestenliste;
+	private JButton neuesspiel;
+	private JPanel punktestand;
+	private JTextField punktestandtext;
+	private JPanel munition;
+	private JLabel munition_arr[] = new JLabel[3];
+	private int ammoCounter = 0;
+	private JPanel spielfortschritt;
+	private JProgressBar fortschrittsbalken;
+	private JButton bestenliste;
 	
 	
 	/**
@@ -67,7 +74,7 @@ public class Toolbar extends JToolBar {
         /* Textfeld ist nicht editierbar, Breite von 5 Spalten, aktuellen Punktestand setzen */
         punktestandtext.setEditable(false);
         punktestandtext.setColumns(5);
-        setScoreFieldText(hauptfenster.getDionaRapModel().getScore());
+        setScoreFieldText();
         
         /* Text zum Panel, Panel zur Toolbar hinzufuegen */
         punktestand.add(punktestandtext);
@@ -78,7 +85,12 @@ public class Toolbar extends JToolBar {
         munition = new JPanel();
         munition.setToolTipText("Zeigt die verfuegbare Munition an");
         munition.setBorder(BorderFactory.createTitledBorder("Munition"));
-        munition.setPreferredSize(new Dimension(50, 30));
+        munition.setLayout(new GridLayout(1, 3, 3, 3));
+        for(int i=0;i<3;i++){
+        	munition_arr[i] = new JLabel();
+        	munition_arr[i].setPreferredSize(new Dimension(30,30));
+        }
+        paintMunitionsAnzeige();
         this.add(munition);
 
 
@@ -91,6 +103,7 @@ public class Toolbar extends JToolBar {
         fortschrittsbalken = new JProgressBar(0,100);
         /* Wert setzen */
         fortschrittsbalken.setValue(hauptfenster.getGameProgress());
+        fortschrittsbalken.setPreferredSize(new Dimension(100,20));
         spielfortschritt.add(fortschrittsbalken);
         this.add(spielfortschritt);
         
@@ -139,6 +152,62 @@ public class Toolbar extends JToolBar {
 	
 
 	/**
+	 * Methode stellt die Munitionsanzeige in der Toolbar dar
+	 */
+	public void paintMunitionsAnzeige(){
+		String theme = hauptfenster.getSpielfeld().getTheme();
+		String pathIcon = "icons"+File.separator+theme+File.separator + "ammo.png";
+		ImageIcon icon_munition = new ImageIcon(pathIcon);
+		int ammocount = hauptfenster.getDionaRapModel().getShootAmount();
+		
+		System.out.println("ammocount " + ammocount);
+		System.out.println("this.ammouCount" + this.ammoCounter);
+		
+		/* hat sich die Munitionsanzahl veraendert */
+		if(ammocount != this.ammoCounter){
+			/* aktualisiere Zaehler + setze Array zurueck*/
+			this.ammoCounter = ammocount;
+			for(int i=0;i<3;i++){
+				munition_arr[i].setText(null);
+				munition_arr[i].setIcon(null);
+				munition_arr[i].setBorder(null);
+				munition.remove(munition_arr[i]);
+				munition.add(munition_arr[i]);
+			}
+			/* Anzahl an Munition <= 3 -> zeige Icons an */
+			if(ammocount <= 3){
+				for(int i=0;i<ammocount;i++){
+					munition_arr[i].setIcon(icon_munition);
+					munition_arr[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+					munition.add(munition_arr[i]);
+				}
+			}
+			/* Anzahl an Munition > 3 -> zeige Zahl + Icons an */
+			else {
+				munition_arr[0].setBorder(null);
+				munition_arr[0].setText("*" + String.valueOf(this.ammoCounter));
+				munition.add(munition_arr[0]);
+				munition_arr[1].setIcon(icon_munition);
+				munition_arr[1].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+				munition.add(munition_arr[1]);
+				munition_arr[2].setIcon(icon_munition);
+				munition_arr[2].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+				munition.add(munition_arr[2]);				
+			}
+		}
+		/* Anzeige an Look & Fell anpassen */
+		munition.updateUI();
+	}
+	
+	
+	public void updateToolbar(){
+		setScoreFieldText();
+		setProgressBarValue();
+		paintMunitionsAnzeige();
+	}
+	
+
+	/**
 	 * Methode um den Button "Neues Spiel" zu aktivieren
 	 * (aktiv wenn Spiel gewonnen / verloren wurde)
 	 */
@@ -160,8 +229,8 @@ public class Toolbar extends JToolBar {
 	 * Methode um den aktuellen Punktestand zu setzen
 	 * @param int punktestand aktueller Punktestand
 	 */
-    public void setScoreFieldText(int punktestand) {
-    	punktestandtext.setText(String.valueOf(punktestand));
+    public void setScoreFieldText(){
+    	punktestandtext.setText(String.valueOf(hauptfenster.getDionaRapModel().getScore()));
     }
 
    
@@ -169,8 +238,8 @@ public class Toolbar extends JToolBar {
 	 * Methode um den aktuellen Fortschritt zu setzen
 	 * @param int progress aktueller Fortschritt
 	 */
-	public void setProgressBarValue(int progress) {
-		fortschrittsbalken.setValue(progress);
+	public void setProgressBarValue(){
+		fortschrittsbalken.setValue(hauptfenster.getGameProgress());
 	}
 	
 	/**

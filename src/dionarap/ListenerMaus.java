@@ -48,12 +48,24 @@ public class ListenerMaus extends MouseAdapter implements ActionListener {
     	popupMenu = new JPopupMenu("Thema");
     	/* fuege Eintraege zum Menu hinzu */
         popupMenu.add(dracula = new JMenuItem("Dracula", (Icon) new ImageIcon(gamedirctory + "icons" + separator + "Dracula" + separator + "player.gif")));
-        dracula.setEnabled(false);
         dracula.addActionListener(this);
         popupMenu.add(spaceWars = new JMenuItem("SpaceWars", (Icon) new ImageIcon(gamedirctory + "icons" + separator + "SpaceWars" + separator + "player1.gif")));
         spaceWars.addActionListener(this);
         popupMenu.add(squareHead = new JMenuItem("SquareHead", (Icon) new ImageIcon(gamedirctory + "icons" + separator + "SquareHead" + separator + "player.gif")));
         squareHead.addActionListener(this);
+        //String theme = hauptfenster.getSpielfeld().getTheme();
+        /*
+        if(this.hauptfenster.getSpielfeld().getTheme().equals("Dracula")){
+        	dracula.setEnabled(false);
+        }
+        else if(this.hauptfenster.getSpielfeld().getTheme().equals("SpaceWars")){
+        	spaceWars.setEnabled(false);        	
+        }
+        else if(this.hauptfenster.getSpielfeld().getTheme().equals("SquareHead")){
+        	squareHead.setEnabled(false);
+        }
+        */
+        // hauptfenster.getSpielfeld().getTheme();
     }    
 
 
@@ -62,7 +74,8 @@ public class ListenerMaus extends MouseAdapter implements ActionListener {
      * setzt das gewaehlte Theme
      */
 	public void actionPerformed(ActionEvent e){
-		if(e.getSource() == dracula) { // setzen des Themes "Dracula"
+		/* setzte Theme Dracula */
+		if(e.getSource() == dracula){
 			hauptfenster.getSpielfeld().setTheme("Dracula");
 			dracula.setEnabled(false);
 			spaceWars.setEnabled(true);

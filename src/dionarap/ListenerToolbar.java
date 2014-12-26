@@ -30,10 +30,9 @@ public class ListenerToolbar implements ActionListener {
 			/* neues Spiel -> Model und Controller neu initialisieren + Spielfeld neu darstellen */
 			hauptfenster.initializeDionaRap();
 			
-			/* Button neues Spiel deaktivieren, Punktestand + Fortschritt zuruecksetzen */
+			/* Button neues Spiel deaktivieren, Punktestand + Fortschritt zuruecksetzen + Munitionsnazeige */
 			hauptfenster.getToolbar().setButtonNSDisabled();
-			hauptfenster.getToolbar().setScoreFieldText(0);
-			hauptfenster.getToolbar().setProgressBarValue(0);		
+			hauptfenster.getToolbar().updateToolbar();
 			System.out.println("Toolbar " + button.getActionCommand());
 			
 			hauptfenster.requestFocus();

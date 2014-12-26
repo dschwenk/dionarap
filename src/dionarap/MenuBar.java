@@ -15,6 +15,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -148,7 +149,6 @@ public class MenuBar extends JMenuBar implements ActionListener {
 		// Spieleinstellungen - MenuItem, Listener, deaktivieren, hinzufuegen
 		spieleinstellungen = new JMenuItem("Spieleinstellungen");
 		spieleinstellungen.addActionListener(this);
-		spieleinstellungen.setEnabled(false);
 		konfiguration.add(spieleinstellungen);		
 		
 		/* Menu Hilfe */
@@ -271,6 +271,12 @@ public class MenuBar extends JMenuBar implements ActionListener {
 				/* Navigtor neu positionieren */
 				hauptfenster.getNavigator().setNavPosition();
 			}
+		}
+		
+		/* Spieleinstellungen-Dialog anzeigen */
+		if(e.getSource() == spieleinstellungen){
+			JPanel panel = new JPanel();
+			//TODO
 		}
 		
 		/* anzeigen der Spielbeschreibung */

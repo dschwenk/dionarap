@@ -28,7 +28,7 @@ public class Hauptfenster extends JFrame {
 	/* Titel */
 	private static String titel = "DionaRap";
 	
-	/* Spielfeld */
+	/* Spielfeld + Groesse + initiale "Schwierigkeit" */
 	private Spielfeld spielfeld;
 	private static int x = 10;
 	private static int y = 10;
@@ -78,7 +78,7 @@ public class Hauptfenster extends JFrame {
 		/* Menuleiste hinzufuegen */
 		this.setJMenuBar(menubar = new MenuBar(this));
 		
-		/* Listener fuer Bewegung des Fensters, Tastendruck, Mausklick  */
+		/* Listener fuer Bewegung des Fensters, Tastendruck, Mausklick */
 		this.addComponentListener(new ListenerFenster(navigator));
 		this.addKeyListener(new ListenerKeyEvents());
 		this.addMouseListener(new ListenerMaus(this));
@@ -135,7 +135,8 @@ public class Hauptfenster extends JFrame {
 		DionaRap_Model.addModelChangedEventListener(new ListenerModel(this,spielfeld));	
 		
 		/* platziere Figuren auf Spielfeld */
-		this.setSpielfeldElements();	
+		this.setSpielfeldElements();
+		
 		
 		/* Initialisierung Controller */
 		this.DionaRap_Controller = new DionaRapController(DionaRap_Model);
@@ -157,9 +158,9 @@ public class Hauptfenster extends JFrame {
 		MTConf.setMinimumTime(800);
 		MTConf.setShotGetsOwnThread(true);
 		MTConf.setOpponentStartWaitTime(5000);
+		MTConf.setOpponentWaitTime(2000);
 		MTConf.setShotWaitTime(300);
 		MTConf.setRandomOpponentWaitTime(false);
-		MTConf.setOpponentWaitTime(1500);
 		MTConf.setDynamicOpponentWaitTime(false);
 	}
 	
@@ -201,8 +202,7 @@ public class Hauptfenster extends JFrame {
 			this.initializeDionaRap();
 			/* Button "Neues Spiel" deaktivieren, Spielstand / Fortschritt zuruecksetzen */
 			this.getToolbar().setButtonNSDisabled();
-			this.getToolbar().setScoreFieldText(0);
-			this.getToolbar().setProgressBarValue(0);				
+			this.getToolbar().updateToolbar();	
 		}
 		else {
 			this.getToolbar().setButtonNSEnabled();
