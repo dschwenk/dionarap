@@ -29,13 +29,12 @@ public class ListenerToolbar implements ActionListener {
 		if(button.getActionCommand() == "newgame"){
 			/* neues Spiel -> Model und Controller neu initialisieren + Spielfeld neu darstellen */
 			hauptfenster.initializeDionaRap();
-			
-			/* Button neues Spiel deaktivieren, Punktestand + Fortschritt zuruecksetzen + Munitionsnazeige */
+			/* Button neues Spiel deaktivieren, packen + Navigator positionieren */
 			hauptfenster.getToolbar().setButtonNSDisabled();
-			hauptfenster.getToolbar().updateToolbar();
-			System.out.println("Toolbar " + button.getActionCommand());
-			
+			hauptfenster.pack();
+			hauptfenster.getNavigator().setNavPosition();			
 			hauptfenster.requestFocus();
+			System.out.println("Toolbar " + button.getActionCommand());
 		}
 		
 		/* Bestenliste */

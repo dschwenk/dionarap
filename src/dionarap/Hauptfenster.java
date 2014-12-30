@@ -139,8 +139,7 @@ public class Hauptfenster extends JFrame {
 		DionaRap_Model.addModelChangedEventListener(new ListenerModel(this,spielfeld));	
 		
 		/* platziere Figuren auf Spielfeld */
-		this.setSpielfeldElements();
-		
+		this.setSpielfeldElements();		
 		
 		/* Initialisierung Controller */
 		this.DionaRap_Controller = new DionaRapController(DionaRap_Model);
@@ -209,9 +208,10 @@ public class Hauptfenster extends JFrame {
 		if(playerchoice == 0){
 			/* neues Spiel -> Model und Controller neu initialisieren + Spielfeld neu darstellen */
 			this.initializeDionaRap();
-			/* Button "Neues Spiel" deaktivieren, Spielstand / Fortschritt zuruecksetzen */
-			this.getToolbar().setButtonNSDisabled();
-			this.getToolbar().updateToolbar();	
+			/* Button neues Spiel deaktivieren, packen + Navigator positionieren */
+			this.getToolbar().setButtonNSDisabled();			
+			this.pack();			
+			this.navigator.setNavPosition();			
 		}
 		else {
 			this.getToolbar().setButtonNSEnabled();
@@ -323,6 +323,17 @@ public class Hauptfenster extends JFrame {
 		String separator = System.getProperty("file.separator");
 		return (gamedirectory + separator);
 	}
+	
+	/**
+	 * Methode aktualisiert die Groesse des Spielfelds, Anzahl an Gegnern + Hindernisse
+	 * @param int y, int x, int opponents, int obstacles - Groesse des Felds in x- und y-Richtung, Anzahl an Gegner + Hindernisse
+	 */
+	public void updateGameSettings(int y, int x, int opponents, int obstacles){
+		this.grid = new Grid(y,x);
+		this.opponents = opponents;
+		this.obstacles = obstacles;
+	}
+	
 	
 	/**
 	 * Gibt den Thread fuer das Blinken der Munitionsanzeige zurueck
