@@ -49,6 +49,10 @@ public class Hauptfenster extends JFrame {
     /* Flag ob Spieleinstellungen angepasst wurden */
 	private boolean game_settings_changed = false;
 	
+	/* Thread - blinken der Munitionsanzeige */
+	private Thread t_ammo;
+	
+	
 	/**
 	 * Konstruktor von <code>Hauptfenster</code>
 	 * Instanziiert das Spielfeld und das Navigationsfenster
@@ -146,6 +150,11 @@ public class Hauptfenster extends JFrame {
 			this.initializeMTConfiguration();
 		}
 		DionaRap_Controller.setMultiThreaded(MTConf);
+		
+		/* Toolbar aktualisieren */
+		if(toolbar != null){
+			toolbar.updateToolbar();			
+		}
 	}
 	
 	/**
@@ -313,5 +322,21 @@ public class Hauptfenster extends JFrame {
 		String gamedirectory = System.getProperty("user.dir");
 		String separator = System.getProperty("file.separator");
 		return (gamedirectory + separator);
+	}
+	
+	/**
+	 * Gibt den Thread fuer das Blinken der Munitionsanzeige zurueck
+	 * @return Thread
+	 */
+	public Thread getThreadt_ammo(){
+		return t_ammo;		
+	}
+	
+	/**
+	 * Methode startet den Thread fuer das Blinken der Munitionsanzeige
+	 */
+	public void createThreadt_ammo(){
+		t_ammo = new ThreadAmmo(this);
+		t_ammo.start();
 	}
 }

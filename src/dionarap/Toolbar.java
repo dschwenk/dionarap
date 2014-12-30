@@ -175,8 +175,11 @@ public class Toolbar extends JToolBar {
 				munition.add(munition_arr[i]);
 			}
 			/* Anzahl an Munition < 0 -> unendlich -> zeige alle Icons an */
-			if(ammocount < 0){
-				for(int i=0;i<3;i++){
+			if(ammocount < 0){				
+				munition_arr[0].setBorder(null);
+				munition_arr[0].setText("   *99");
+				munition.add(munition_arr[0]);
+				for(int i=1;i<3;i++){
 					munition_arr[i].setIcon(icon_munition);
 					munition_arr[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 					munition.add(munition_arr[i]);
@@ -262,6 +265,22 @@ public class Toolbar extends JToolBar {
 	 */
 	public void hideToolbar(){
 		this.setVisible(false);
+	}
+	
+	/**
+	 * Methode gibt das Array fuer die Labels der Munitionsanzeige zurueck
+	 * @return JLabel[]
+	 */
+	public JLabel[] getMuniJLabelArr(){
+		return munition_arr;
+	}
+	
+	/**
+	 * Methode gibt das Panel fuer die Munitionsanzeige zurueck
+	 * @return
+	 */
+	public JPanel getMuniJPanel(){
+		return munition;		
 	}
 	
 }

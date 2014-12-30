@@ -12,7 +12,7 @@ import de.fhwgt.dionarap.controller.DionaRapController;
  * Klasse realisiert den Listener der auf einen Schuss reagiert. Die Klasse implementiert
  * das Interface <code>ActionListener</code>. 
  * @author Daniel Schwenk
- * @version Aufgabe 4
+ * @version Aufgabe 7
  */
 public class ListenerWaffe implements ActionListener {
 
@@ -26,6 +26,18 @@ public class ListenerWaffe implements ActionListener {
 		/* benoetige DionaRapController um zu Schiessen */
 		Hauptfenster hauptfenster = (Hauptfenster) button.getTopLevelAncestor().getParent();
 		DionaRapController dr_controller = (DionaRapController) hauptfenster.getDionaRapController();
+		
+		/* pruefe ob Munition vorhanden - falls nicht erzeuge Thread um Anzeige zum Blinken zu bringen */
+		if(hauptfenster.getDionaRapModel().getShootAmount() == 0){
+			/* erzeuge neuen Thread falls dieser noch nicht besteht */
+			if(hauptfenster.getThreadt_ammo() == null){
+				hauptfenster.createThreadt_ammo();
+			}
+			else if(!(hauptfenster.getThreadt_ammo().isAlive())){
+				hauptfenster.createThreadt_ammo();				
+			}
+		}
+		
 		
 		dr_controller.shoot();
 		
