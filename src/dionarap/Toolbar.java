@@ -155,13 +155,10 @@ public class Toolbar extends JToolBar {
 	 * Methode stellt die Munitionsanzeige in der Toolbar dar
 	 */
 	public void paintMunitionsAnzeige(){
-		String theme = hauptfenster.getSpielfeld().getTheme();
+		String theme = hauptfenster.getTheme();
 		String pathIcon = "icons"+File.separator+theme+File.separator + "ammo.png";
 		ImageIcon icon_munition = new ImageIcon(pathIcon);
 		int ammocount = hauptfenster.getDionaRapModel().getShootAmount();
-		
-		System.out.println("ammocount " + ammocount);
-		System.out.println("this.ammouCount" + this.ammoCounter);
 		
 		/* hat sich die Munitionsanzahl veraendert */
 		if(ammocount != this.ammoCounter){

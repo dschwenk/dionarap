@@ -37,9 +37,6 @@ public class Spielfeld extends JPanel {
     private int size_spielfeld_x = 12;
 	private int size_spielfeld_y = 12;
     
-    /* Theme beim Spielstart */
-    private String theme = "Dracula";
-
 	/* Icons */
 	private ImageIcon iconAmmo;
 	private ImageIcon iconDestruction;
@@ -121,12 +118,23 @@ public class Spielfeld extends JPanel {
 		}
 	}
 
+	/**
+	 * Methode aktualisiert das Theme
+	 */
+	public void changeTheme(){
+		this.setIcons();
+		this.removeIconsFromSpielfeld();
+		this.paintPawns(hauptfenster.getPawns());	
+	}
 
 
 	/**
 	 * Setzt die Icons für die Spielfiguren
 	 */
 	private void setIcons(){
+		
+		String theme = this.hauptfenster.getTheme();
+		
 		// String mit Pfad zu Icons
 		String pathIcons = "icons"+File.separator+theme+File.separator;
 
@@ -196,7 +204,6 @@ public class Spielfeld extends JPanel {
 	 * @param dionaRap_Pawns Spielfigur vom Typ <code>AbstractPawn</code>
 	 */
 	public void paintPawns(AbstractPawn[] dionaRap_Pawns){		
-		System.out.println("paint pawn - length: " + dionaRap_Pawns.length);
 		for(int i=0;i < dionaRap_Pawns.length;i++){
 			/* erfrage Position der Figur */
 			int posX = dionaRap_Pawns[i].getX();
@@ -277,26 +284,6 @@ public class Spielfeld extends JPanel {
 		}
 	}
 	
-	
-	/**
-	 * Setzt das Theme
-	 * @param String theme
-	 */
-	public void setTheme(String theme){
-		this.theme = theme;
-		this.setIcons();
-		this.removeIconsFromSpielfeld();
-		this.paintPawns(hauptfenster.getPawns());
-	}
-	
-	
-	/**
-	 *Gibt das Theme zurueck
-	 * @return String theme 
-	 */
-	public String getTheme(){
-		return this.theme;
-	}
 	
 	/**
 	 * Gibt die Spielfeldgroesse in X-Richtung zurueck

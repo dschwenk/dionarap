@@ -38,7 +38,10 @@ public class Hauptfenster extends JFrame {
 	
 	private Toolbar toolbar;
 	private MenuBar menubar;
-	private Navigator navigator;	
+	private Navigator navigator;
+	
+    /* Theme beim Spielstart */
+    private String theme = "Dracula";
 	
 	/* Model + Controller */
 	private DionaRapModel DionaRap_Model;
@@ -185,7 +188,7 @@ public class Hauptfenster extends JFrame {
 	public void drawGameResultDialog(boolean game_lost){
 		this.requestFocus();
 		/* Gewonnen / Verloren Icons, Ausgabestrings, Dialogrueckgabewert */
-		String theme = this.getSpielfeld().getTheme();
+		String theme = this.getTheme();
 		String path_icons = "icons"+File.separator+theme+File.separator;
 		ImageIcon gameover = new ImageIcon(path_icons + "gameover.gif");
 		ImageIcon win = new ImageIcon(path_icons + "win.gif");		
@@ -333,6 +336,26 @@ public class Hauptfenster extends JFrame {
 		String separator = System.getProperty("file.separator");
 		return (gamedirectory + separator);
 	}
+	
+	
+	/**
+	 *Gibt das Theme zurueck
+	 * @return String theme 
+	 */
+	public String getTheme(){
+		return this.theme;
+	}
+	
+	/**
+	 * Setzt das Theme
+	 * @param String theme
+	 */
+	public void setTheme(String theme){
+		this.theme = theme;
+		this.spielfeld.changeTheme();
+	}
+	
+	
 	
 	/**
 	 * Methode aktualisiert die Groesse des Spielfelds, Anzahl an Gegnern + Hindernisse

@@ -153,7 +153,7 @@ public class Sound {
 	public void playSoundShoot(){
 		try {
 			/* Sound an Theme anpassen */
-			if(this.hauptfenster.getSpielfeld().getTheme().equals("Dracula")){
+			if(this.hauptfenster.getTheme().equals("Dracula")){
 				clip_shoot.start();				
 			}
 			else {

@@ -26,10 +26,12 @@ import de.fhwgt.dionarap.controller.DionaRapController;
 public class ListenerMaus extends MouseAdapter implements ActionListener {
 
 	private Hauptfenster hauptfenster;
+    private DionaRapController DRController;
+    
 	private JLabel[][] labelArray;
 	private int playerposition_x;
 	private int playerposition_y;
-    private DionaRapController DRController;
+
     private JPopupMenu popupMenu;
     private JMenuItem dracula;
     private JMenuItem spaceWars;
@@ -53,19 +55,16 @@ public class ListenerMaus extends MouseAdapter implements ActionListener {
         spaceWars.addActionListener(this);
         popupMenu.add(squareHead = new JMenuItem("SquareHead", (Icon) new ImageIcon(gamedirctory + "icons" + separator + "SquareHead" + separator + "player.gif")));
         squareHead.addActionListener(this);
-        //String theme = hauptfenster.getSpielfeld().getTheme();
-        /*
-        if(this.hauptfenster.getSpielfeld().getTheme().equals("Dracula")){
+
+        if(this.hauptfenster.getTheme().equals("Dracula")){
         	dracula.setEnabled(false);
         }
-        else if(this.hauptfenster.getSpielfeld().getTheme().equals("SpaceWars")){
+        else if(this.hauptfenster.getTheme().equals("SpaceWars")){
         	spaceWars.setEnabled(false);        	
         }
-        else if(this.hauptfenster.getSpielfeld().getTheme().equals("SquareHead")){
+        else if(this.hauptfenster.getTheme().equals("SquareHead")){
         	squareHead.setEnabled(false);
         }
-        */
-        // hauptfenster.getSpielfeld().getTheme();
     }    
 
 
@@ -76,24 +75,24 @@ public class ListenerMaus extends MouseAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent e){
 		/* setzte Theme Dracula */
 		if(e.getSource() == dracula){
-			hauptfenster.getSpielfeld().setTheme("Dracula");
+			hauptfenster.setTheme("Dracula");
 			dracula.setEnabled(false);
 			spaceWars.setEnabled(true);
 			squareHead.setEnabled(true);
 		}
 		/* setze Theme SpaceWars */
 		if(e.getSource() == spaceWars){
-			hauptfenster.getSpielfeld().setTheme("SpaceWars");
-			spaceWars.setEnabled(false);
+			hauptfenster.setTheme("SpaceWars");
 			dracula.setEnabled(true);
+			spaceWars.setEnabled(false);
 			squareHead.setEnabled(true);
 		}
 		/* setze Theme Squarehead */		
 		if(e.getSource() == squareHead){
-			hauptfenster.getSpielfeld().setTheme("SquareHead");
-			squareHead.setEnabled(false);
+			hauptfenster.setTheme("SquareHead");
 			dracula.setEnabled(true);
 			spaceWars.setEnabled(true);
+			squareHead.setEnabled(false);
 		}		
 	}
 

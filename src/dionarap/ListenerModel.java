@@ -81,17 +81,20 @@ public class ListenerModel implements DionaRapListener {
 		spielfeld.gameStatusEnd(hauptfenster.getPlayer(), game_lost);
 		
 		/* in Highscore eintragen */
-		int position = HighScoreFile.SCORE_TO_LOW_FOR_HIGHSCORE;
-		try {
-			position = HighScoreFile.getInstance().getScorePosition(hauptfenster.getDionaRapModel().getScore());
+		if(game_lost == false){
+			int position = HighScoreFile.SCORE_TO_LOW_FOR_HIGHSCORE;
+			try {
+				position = HighScoreFile.getInstance().getScorePosition(hauptfenster.getDionaRapModel().getScore());
+			}
+			catch(IOException ex){
+				System.err.println("File kann nicht gelesen werden: " + ex);
+			}
+			/* pruefe ob Spieler in Bestenliste kommt */
+			if(position != HighScoreFile.SCORE_TO_LOW_FOR_HIGHSCORE){
+				addPlayerToBestenliste();
+			}			
 		}
-		catch(IOException ex){
-			System.err.println("File kann nicht gelesen werden: " + ex);
-		}
-		/* pruefe ob Spieler in Bestenliste kommt */
-		if(position != HighScoreFile.SCORE_TO_LOW_FOR_HIGHSCORE){
-			addPlayerToBestenliste();
-		}
+
 		
 		/* zeige Gewonnen / Verloren Dialog an */ 
 		hauptfenster.drawGameResultDialog(game_lost);
@@ -103,7 +106,7 @@ public class ListenerModel implements DionaRapListener {
 	 * Punkte + Name in Bestenlistendatei
 	 */
 	public void addPlayerToBestenliste(){
-		String theme = hauptfenster.getSpielfeld().getTheme();
+		String theme = hauptfenster.getTheme();
 		String pathIcon = "icons"+File.separator+theme+File.separator + "win.gif";
         String[] choices = {"Eintragen", "Abbrechen"};
         ImageIcon win = new ImageIcon(pathIcon);
