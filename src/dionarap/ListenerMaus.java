@@ -93,7 +93,7 @@ public class ListenerMaus extends MouseAdapter implements ActionListener {
 			dracula.setEnabled(true);
 			spaceWars.setEnabled(true);
 			squareHead.setEnabled(false);
-		}		
+		}
 	}
 
 	

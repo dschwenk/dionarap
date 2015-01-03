@@ -148,7 +148,7 @@ public class Hauptfenster extends JFrame {
 		DionaRap_Model.addModelChangedEventListener(new ListenerModel(this,spielfeld));	
 		
 		/* platziere Figuren auf Spielfeld */
-		this.setSpielfeldElements();		
+		this.setSpielfeldElements();
 		
 		/* Initialisierung Controller */
 		this.DionaRap_Controller = new DionaRapController(DionaRap_Model);
@@ -165,6 +165,7 @@ public class Hauptfenster extends JFrame {
 		}
 	}
 	
+
 	/**
 	 * Initialisiert die Multithreading-Einstellungen
 	 */
@@ -222,7 +223,7 @@ public class Hauptfenster extends JFrame {
 			/* neues Spiel -> Model und Controller neu initialisieren + Spielfeld neu darstellen */
 			this.initializeDionaRap();
 			/* Button neues Spiel deaktivieren, packen + Navigator positionieren */
-			this.getToolbar().setButtonNSDisabled();			
+			this.getToolbar().setButtonNSDisabled();
 			this.pack();			
 			this.navigator.setNavPosition();			
 		}
