@@ -126,39 +126,51 @@ public class ListenerMaus extends MouseAdapter implements ActionListener {
 					if(e.getSource().equals(labelArray[i][j])){
 						/* es wurde auf den Spieler geklickt - schiessen */
 						if(i == playerposition_y && j == playerposition_x){
+							/* Sound fuer Schuss sofern Munition vorhanden*/
+							if(hauptfenster.getDionaRapModel().getShootAmount() > 0){
+								hauptfenster.getSounds().playSoundShoot();
+							}
 							DRController.shoot();
 							break;
 						}
 						/* es wurde "links unten" geklickt */
 						else if(playerposition_y - i == -1 && playerposition_x -j == 1){
+							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(1);
 						}
 						/* es wurde "unten" geklickt */
 						else if(playerposition_y - i == -1 && playerposition_x -j == 0){
+							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(2);
 						}
 						/* es wurde "rechts unten" geklickt */
 						else if(playerposition_y - i == -1 && playerposition_x -j == -1){
+							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(3);
 						}						
 						/* es wurde "rechts" geklickt */
 						else if(playerposition_y - i == 0 && playerposition_x -j == -1){
+							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(6);
 						}
 						/* es wurde "rechts oben" geklickt */
 						else if(playerposition_y - i == 1 && playerposition_x -j == -1){
+							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(9);
 						}							
 						/* es wurde "oben" geklickt */
 						else if(playerposition_y - i == 1 && playerposition_x -j == 0){
+							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(8);
 						}
 						/* es wurde "links oben" geklickt */
 						else if(playerposition_y - i == 1 && playerposition_x -j == 1){
+							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(7);
 						}
 						/* es wurde "links" geklickt */
 						else if(playerposition_y - i == 0 && playerposition_x -j == 1){
+							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(4);
 						}						
 					}

@@ -66,11 +66,13 @@ public class ListenerModel implements DionaRapListener {
 		if(e.isGameWon()){
 			game_lost = false;
 			System.out.println("Spiel gewonnen");
+			this.hauptfenster.getSounds().playSoundGameWon();
 		}
 		/* Spiel wurde verloren */
 		else {
 			game_lost = true;
-			System.out.println("Spiel verloren");			
+			System.out.println("Spiel verloren");
+			this.hauptfenster.getSounds().playSoundGameOver();
 		}
 
 		/* setze abschliessend Figuren + spezielle Spielerfigur (Gewinner/Verlierer Spielerfigur) */

@@ -26,6 +26,7 @@ public class Sound {
 	private AudioInputStream aistream_move;
 	private AudioInputStream aistream_shoot;
 	private AudioInputStream aistream_lasershoot;
+	
 	/* Clips */
 	private Clip clip_gameWon;
 	private Clip clip_gameOver;
@@ -37,19 +38,19 @@ public class Sound {
 	 * Konstruktor der Klasse Sound
 	 * @throws IOException 
 	 */
-	public Sound(Hauptfenster hauptfenster) throws IOException{
+	public Sound(Hauptfenster hauptfenster){
 		
 		this.hauptfenster = hauptfenster;
 		String sound_dir = this.hauptfenster.getGameDirectory() + "sounds" + File.separator;
 		
 		/* erzeuge Audiostreams */
 		try {
-			aistream_gameWon = AudioSystem.getAudioInputStream(new File(sound_dir + "GameOver.wav"));			
+			aistream_gameWon = AudioSystem.getAudioInputStream(new File(sound_dir + "Gewonnen.wav"));			
 		} catch (Exception ex){
 			System.out.println("Fehler beim Oeffnen der Sounddatei 'GameOver.wav'" + ex);
 		}
 		try {
-			aistream_gameOver = AudioSystem.getAudioInputStream(new File(sound_dir + "Gewonnen.wav"));			
+			aistream_gameOver = AudioSystem.getAudioInputStream(new File(sound_dir + "GameOver.wav"));			
 		} catch (Exception ex){
 			System.out.println("Fehler beim Oeffnen der Sounddatei 'Gewonnen.wav'" + ex);
 		}
@@ -96,6 +97,83 @@ public class Sound {
 		}
 		catch (LineUnavailableException luex){
 			System.out.println("Fehler beim Oeffnen eines Clip-Objekts" + luex);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Methode zum Abspielen des Sounds wenn Spiel gewonnen wurde
+	 */
+	public void playSoundGameWon(){
+		try {
+			clip_gameWon.stop();
+			clip_gameWon.setFramePosition(0);			
+			clip_gameWon.start();
+		}
+		catch (Exception ex){
+			System.out.println("Fehler beim Abspielen des Clips 'GameWon'" + ex);
+		}
+	}	
+	
+	/**
+	 * Methode zum Abspielen des Sounds wenn Spiel verloren wurde
+	 */
+	public void playSoundGameOver(){
+		try {
+			clip_gameOver.stop();
+			clip_gameOver.setFramePosition(0);
+			clip_gameOver.start();
+		}
+		catch (Exception ex){
+			System.out.println("Fehler beim Abspielen des Clips 'GameOver'" + ex);
+		}
+	}
+	
+	
+	/**
+	 * Methode zum Abspielen des Sounds wenn der Spieler sich bewegt
+	 */
+	public void playSoundMove(){
+		try {
+			clip_move.stop();
+			clip_move.setFramePosition(0);
+			clip_move.start();
+		}
+		catch (Exception ex){
+			System.out.println("Fehler beim Abspielen des Clips 'Maustatste'" + ex);
+		}
+	}	
+	
+	
+	/**
+	 * Methode zum Abspielen des Sounds wenn Spiel einen Schuss abgibt
+	 */
+	public void playSoundShoot(){
+		try {
+			/* Sound an Theme anpassen */
+			if(this.hauptfenster.getSpielfeld().getTheme().equals("Dracula")){
+				clip_shoot.start();				
+			}
+			else {
+				clip_lasershoot.start();
+			}
+		}
+		catch (Exception ex){
+			System.out.println("Fehler beim Abspielen des Clips 'GameOver'" + ex);
+		}
+	}
+	
+	
+	/**
+	 * Methode stopt alle Sounds
+	 */
+	public void stopSounds(){
+		clip_gameWon.stop();
+		clip_gameOver.stop();
+		clip_move.stop();
+		clip_shoot.stop();
+		clip_lasershoot.stop();
 	}
 }

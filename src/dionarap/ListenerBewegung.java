@@ -30,6 +30,9 @@ public class ListenerBewegung implements ActionListener {
 		DionaRapController dr_controller = (DionaRapController) hauptfenster.getDionaRapController();
 		/* bewege Spieler in entsprechende Richtung */
 		dr_controller.movePlayer(Integer.parseInt(button.getActionCommand()));
+		
+		/* Sound fuer Bewegung */
+		hauptfenster.getSounds().playSoundMove();
 
         System.out.println("Move " + button.getActionCommand());
 		hauptfenster.requestFocus();

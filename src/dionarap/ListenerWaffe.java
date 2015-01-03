@@ -38,6 +38,10 @@ public class ListenerWaffe implements ActionListener {
 			}
 		}
 		
+		/* Sound fuer Schuss sofern Munition vorhanden*/
+		if(hauptfenster.getDionaRapModel().getShootAmount() > 0){
+			hauptfenster.getSounds().playSoundShoot();
+		}		
 		
 		dr_controller.shoot();
 		

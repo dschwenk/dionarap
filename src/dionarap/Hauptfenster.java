@@ -52,6 +52,9 @@ public class Hauptfenster extends JFrame {
 	/* Thread - blinken der Munitionsanzeige */
 	private Thread t_ammo;
 	
+	/* Sound */
+	private Sound sounds;
+	
 	
 	/**
 	 * Konstruktor von <code>Hauptfenster</code>
@@ -64,6 +67,9 @@ public class Hauptfenster extends JFrame {
 		this.setTitle(titel);
 		this.setResizable(false);
 		this.setLayout(new BorderLayout());
+		
+		/* initialisiere Sound */
+		this.sounds = new Sound(this);
 		
 		/* initialisiere DionaRap Model + Controller */
 		this.initializeDionaRap();
@@ -204,6 +210,10 @@ public class Hauptfenster extends JFrame {
 		else {
 			playerchoice = JOptionPane.showOptionDialog(this, "Gewonnen", "Spiel gewonnen!", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, win, playerchoicestrings, "Neues Spiel");
 		}
+		
+		/* Sound beenden */
+		this.getSounds().stopSounds();
+		
 		/* Werte gedrueckten Dialogbutton aus */
 		if(playerchoice == 0){
 			/* neues Spiel -> Model und Controller neu initialisieren + Spielfeld neu darstellen */
@@ -342,6 +352,7 @@ public class Hauptfenster extends JFrame {
 	public Thread getThreadt_ammo(){
 		return t_ammo;		
 	}
+
 	
 	/**
 	 * Methode startet den Thread fuer das Blinken der Munitionsanzeige
@@ -349,5 +360,13 @@ public class Hauptfenster extends JFrame {
 	public void createThreadt_ammo(){
 		t_ammo = new ThreadAmmo(this);
 		t_ammo.start();
+	}
+	
+	
+	/**
+	 * Gibt Sound zurueck
+	 */
+	public Sound getSounds(){
+		return this.sounds;
 	}
 }
