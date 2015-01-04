@@ -356,6 +356,28 @@ public class Hauptfenster extends JFrame {
 		this.spielfeld.changeTheme();
 	}
 	
+	/**
+	 * Methode gibt das Grid fuer die Spielfeldgroesse zurueck
+	 * @return 
+	 */
+	public Grid getGrid(){
+		return this.grid;
+	}
+	
+	
+	/**
+	 * Methode gibt die Anzahl der Gegner zurueck
+	 */
+	public int getOpponentCount(){
+		return this.opponents;
+	}
+	
+	/**
+	 * Methode gibt die Anzahl der Hindernisse zurueck
+	 */
+	public int getObstacleCount(){
+		return this.obstacles;
+	}
 	
 	
 	/**

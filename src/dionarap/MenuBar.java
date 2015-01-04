@@ -163,7 +163,6 @@ public class MenuBar extends JMenuBar implements ActionListener {
 		this.add(konfiguration);
 		this.add(hilfe);
 	}
-	
 
 
     /**
@@ -271,7 +270,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
 				hauptfenster.pack();
 				hauptfenster.getNavigator().setNavPosition();
 				
-				/* soll  nachdem ein Level eingelesen wurde beim naechsten neuen Spiel diese Daten uebenrommen werden oder "Standardspiel" gestartet werden??
+				/* soll nachdem ein Level eingelesen wurde beim naechsten neuen Spiel diese Daten uebenrommen werden oder "Standardspiel" gestartet werden??
 				hauptfenster.updateGameSettings(
 						hauptfenster.getDionaRapModel().getGrid().getGridSizeY(),
 						hauptfenster.getDionaRapModel().getGrid().getGridSizeX(),
@@ -284,8 +283,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
 		
 		/* Spieleinstellungen-Dialog anzeigen */
 		if(e.getSource() == spieleinstellungen){
-			JPanel panel = new JPanel();
-			//TODO
+			new Spieleinstellungen(hauptfenster);
 		}
 		
 		/* anzeigen der Spielbeschreibung */
@@ -293,5 +291,4 @@ public class MenuBar extends JMenuBar implements ActionListener {
 				new Spielebeschreibung(hauptfenster);
 		}		
 	}
-
 }
