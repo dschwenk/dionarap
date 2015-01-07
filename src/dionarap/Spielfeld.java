@@ -25,18 +25,15 @@ import de.fhwgt.dionarap.model.objects.Vortex;
  */
 public class Spielfeld extends JPanel {
 
-	/* The serializable class Spielfeld does not declare a static final serialVersionUID field of type long */
-	private static final long serialVersionUID = 1L;
-	
 	private Hauptfenster hauptfenster;
-	
+
 	/* Array mit Schachbrettfeldern, Zeilen x Spalten */
 	private JLabel[][] Schachbrett;
-	
+
     // gibt die Anzahl der Felder in x- / y-Richtung an
-    private int size_spielfeld_x = 12;
-	private int size_spielfeld_y = 12;
-    
+    private int size_spielfeld_x = 10;
+	private int size_spielfeld_y = 10;
+   
 	/* Icons */
 	private ImageIcon iconAmmo;
 	private ImageIcon iconDestruction;
@@ -70,7 +67,6 @@ public class Spielfeld extends JPanel {
 		/* setze Spielfiguricons */
 		this.setIcons();
 	}
-
 
 
 	/**
@@ -189,13 +185,12 @@ public class Spielfeld extends JPanel {
 		int size_x = hauptfenster.getDionaRapModel().getGrid().getGridSizeX();
 		int size_y = hauptfenster.getDionaRapModel().getGrid().getGridSizeY();		
 		/* gehe Felder nacheinander durch */
-		for(int zeile = 0; zeile < size_y; zeile++){		
+		for(int zeile = 0; zeile < size_y; zeile++){
 			for(int spalte = 0; spalte < size_x; spalte++){
 				this.remove(Schachbrett[zeile][spalte]);
-			}			
+			}
 		}
 	}	
-
 
 
 	/**
@@ -266,8 +261,8 @@ public class Spielfeld extends JPanel {
 			}
 		}
 	}
-	
-	
+
+
 	/**
 	 * Setzt das Gewonnen / Verloren SpielerIcon auf das Spielfeld
 	 * @param Player spieler Spielerfigur
@@ -283,15 +278,16 @@ public class Spielfeld extends JPanel {
 			this.Schachbrett[spieler.getY()][spieler.getX()].setIcon(iconPlayer);
 		}
 	}
-	
-	
+
+
 	/**
 	 * Gibt die Spielfeldgroesse in X-Richtung zurueck
 	 */
 	public int getSpielfeldSizeX(){
 		return this.size_spielfeld_x;
 	}
-	
+
+
 	/**
 	 * Gibt die Spielfeldgroesse in Y-Richtung zurueck
 	 */
@@ -299,10 +295,11 @@ public class Spielfeld extends JPanel {
 		return this.size_spielfeld_y;
 	}	
 	
+
 	/**
 	 * Gibt das Spielfeld zurueck
 	 */
 	public JLabel[][] getSpielfeldArray(){
 		return this.Schachbrett;
-	}	
+	}
 }

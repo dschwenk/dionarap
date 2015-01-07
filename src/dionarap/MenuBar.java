@@ -31,52 +31,48 @@ import de.fhwgt.dionarap.model.data.MTConfiguration;
  * Klasse realisiert das Menu, abgeleitet von <code>JMenuBar</code>, implementiert <code>ActionListener</code>
  * 
  * @author Daniel Schwenk
- * @version Aufgabe 6
+ * @version Aufgabe 7
  */
 public class MenuBar extends JMenuBar implements ActionListener {
 
-	private static final long serialVersionUID = 1L;
-
 	private Hauptfenster hauptfenster;
-
-    /* Flag Toolbar sichtbar */
-    private boolean toolbarsichtbar = true;
-    /* Flag Toolbar oben / unten */
-    private boolean showtoolbarontop = true;
-    /* Falg Navigator sichtbar */
-    private boolean navigatorsichtbar = true;
-    /* Look and Feels Array */
-    private UIManager.LookAndFeelInfo[] lookandfeeluimanagerinfoarray;
-    /* Look and Feels RadioButton Array */
-    private JRadioButtonMenuItem lookandfeelradiobuttonarray[];
-    /* aktiver Look and Feel Radiobutton */
-    private int activeradiobutton = 0;
-    /* Anzahl an vorhandenen Look and Fells */
-    private int lookandfeelcounter;
-
 	
-    // Menueleiste Elemente
-    private JMenu ansicht;
-    private JMenu hilfe;
-    private JMenu konfiguration;
-    
-    /* Anicht Elemente */
-    private JMenu toolbarposition;
-    private JMenu lookandfeelmenu;
-    private JMenuItem toolbartop;
-    private JMenuItem toolbarbottom;    
-    private JCheckBoxMenuItem toolbaranzeigen;
-    private JCheckBoxMenuItem navigatoranzeigen;
-    
-    /* Konfiguration Elemnete */
-    private JMenuItem leveleinlesen;
-    private JMenuItem spieleinstellungen;  
-    
-    // Hilfe Elemente
-    private JMenuItem spielbeschreibung;
+	/* Flag Toolbar sichtbar */
+	private boolean toolbarsichtbar = true;
+	/* Flag Toolbar oben / unten */
+	private boolean showtoolbarontop = true;
+	/* Falg Navigator sichtbar */
+	private boolean navigatorsichtbar = true;
+	/* Look and Feels Array */
+	private UIManager.LookAndFeelInfo[] lookandfeeluimanagerinfoarray;
+	/* Look and Feels RadioButton Array */
+	private JRadioButtonMenuItem lookandfeelradiobuttonarray[];
+	/* aktiver Look and Feel Radiobutton */
+	private int activeradiobutton = 0;
+	/* Anzahl an vorhandenen Look and Fells */
+	private int lookandfeelcounter;
+
+	// Menueleiste Elemente
+	private JMenu ansicht;
+	private JMenu hilfe;
+	private JMenu konfiguration;
+
+	/* Anicht Elemente */
+	private JMenu toolbarposition;
+	private JMenu lookandfeelmenu;
+	private JMenuItem toolbartop;
+	private JMenuItem toolbarbottom;    
+	private JCheckBoxMenuItem toolbaranzeigen;
+	private JCheckBoxMenuItem navigatoranzeigen;
+
+	/* Konfiguration Elemnete */
+	private JMenuItem leveleinlesen;
+	private JMenuItem spieleinstellungen;  
+	
+	/* Hilfe Elemente */
+	private JMenuItem spielbeschreibung;
 
 
-    
 	/**
 	 * Konstruktor der Menuleiste vom Typ <code>JMenuBar</code>
 	 * @param parent Vaterfenster vom Typ <code>Hauptfenster</code>
@@ -150,14 +146,15 @@ public class MenuBar extends JMenuBar implements ActionListener {
 		spieleinstellungen = new JMenuItem("Spieleinstellungen");
 		spieleinstellungen.addActionListener(this);
 		konfiguration.add(spieleinstellungen);		
-		
+
+
 		/* Menu Hilfe */
-		
+
 		// Spielbeschreibung - MenuItem, Listener, hinzufuegen
 		spielbeschreibung = new JMenuItem("Spielbeschreibung");
 		spielbeschreibung.addActionListener(this);
-		hilfe.add(spielbeschreibung);	
-		
+		hilfe.add(spielbeschreibung);
+
 		/* JMenus zur Menuleiste hinzufuegen */
 		this.add(ansicht);
 		this.add(konfiguration);
@@ -169,7 +166,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
      * Eventhandler fuer das Event <code>actionPerformed</code>,
      * Events zu den Elementen in der Menuleisten werden verarbeitet
      */
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e){
 
 		/* welches Menuleistenelement hat das Event ausgeloest */
 		
@@ -272,7 +269,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
 				hauptfenster.getNavigator().setNavPosition();
 				
 				// soll nachdem ein Level eingelesen wurde beim naechsten neuen Spiel diese Daten uebenrommen werden oder "Standardspiel" gestartet werden??
-				/*
+				/* aktualisiere Spieleinstellungen mit den Einstellungen aus der XML */
 				hauptfenster.updateGameSettings(
 						hauptfenster.getDionaRapModel().getGrid().getGridSizeY(),
 						hauptfenster.getDionaRapModel().getGrid().getGridSizeX(),
@@ -280,7 +277,6 @@ public class MenuBar extends JMenuBar implements ActionListener {
 						hauptfenster.getDionaRapModel().getObstacles().size()
 				);
 				hauptfenster.setFlagGameSettingsChanged();
-				*/				
 			}
 		}
 		
