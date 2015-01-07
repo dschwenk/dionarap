@@ -48,6 +48,11 @@ public class ListenerKeyEvents implements KeyListener {
     			}
     		}
     		
+    		/* gueltige Bewegung - stoppe blinken der Felder */
+    		if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+    			hauptfenster.stopThreadt_field();
+    		}    		
+    		
     		/* Sound fuer Schuss sofern Munition vorhanden*/
     		if(hauptfenster.getDionaRapModel().getShootAmount() >= 0 || hauptfenster.getDionaRapModel().getShootAmount() == -1){
     			hauptfenster.getSounds().playSoundShoot();
@@ -58,9 +63,29 @@ public class ListenerKeyEvents implements KeyListener {
         }
         /* Taste 1-4 + 6-9 */
         else if(e.getKeyChar() != '5' &&  ('1' <= e.getKeyChar() && e.getKeyChar() <= '9')){
+        	
+    		/* akutelle Spielerposition */
+    		int playerposition_x = hauptfenster.getPlayer().getX();
+    		int playerposition_y = hauptfenster.getPlayer().getY();
+        	
         	/* bewege Spieler in entsprechende Richtun */
         	dr_controller.movePlayer(Character.getNumericValue(e.getKeyChar()));
-            System.out.println("Move " + e.getKeyChar());
+            
+    		/* gueltige Bewegung - stoppe blinken der Felder */
+    		if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+    			hauptfenster.stopThreadt_field();
+    		}		
+    		else {
+    			/* Sound fuer Bewegung */
+    			hauptfenster.getSounds().playSoundMove();			
+    		}
+
+    		/* hat sich die Spielerposition zur vorherigen Positiongeaendert */
+    		if((playerposition_x == hauptfenster.getPlayer().getX()) && playerposition_y == (hauptfenster.getPlayer().getY())){
+                hauptfenster.createThreadt_field();
+            }        	
+        	
+        	System.out.println("Move " + e.getKeyChar());
         }
         /* beliebige andere Taste */
         else {

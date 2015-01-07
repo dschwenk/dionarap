@@ -30,6 +30,10 @@ public class ListenerBewegung implements ActionListener {
 		Hauptfenster hauptfenster = (Hauptfenster) button.getTopLevelAncestor().getParent();
 		DionaRapController dr_controller = (DionaRapController) hauptfenster.getDionaRapController();
 
+		/* akutelle Spielerposition */
+		int playerposition_x = hauptfenster.getPlayer().getX();
+		int playerposition_y = hauptfenster.getPlayer().getY();
+		
 		/* bewege Spieler in entsprechende Richtung */
 		dr_controller.movePlayer(Integer.parseInt(button.getActionCommand()));
 		
@@ -37,10 +41,16 @@ public class ListenerBewegung implements ActionListener {
 		if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
 			hauptfenster.stopThreadt_field();
 		}		
-		
-		/* Sound fuer Bewegung */
-		hauptfenster.getSounds().playSoundMove();
+		else {
+			/* Sound fuer Bewegung */
+			hauptfenster.getSounds().playSoundMove();			
+		}
 
+		/* hat sich die Spielerposition zur vorherigen Positiongeaendert */
+		if((playerposition_x == hauptfenster.getPlayer().getX()) && playerposition_y == (hauptfenster.getPlayer().getY())){
+            hauptfenster.createThreadt_field();
+        }
+                
         System.out.println("Move " + button.getActionCommand());
 		hauptfenster.requestFocus();
 	}
