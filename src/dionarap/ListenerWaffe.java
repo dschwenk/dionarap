@@ -33,6 +33,7 @@ public class ListenerWaffe implements ActionListener {
 			if(hauptfenster.getThreadt_ammo() == null){
 				hauptfenster.createThreadt_ammo();
 			}
+			/* oder nicht mehr aktiv ist */
 			else if(!(hauptfenster.getThreadt_ammo().isAlive())){
 				hauptfenster.createThreadt_ammo();				
 			}

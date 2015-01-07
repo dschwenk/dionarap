@@ -125,53 +125,110 @@ public class ListenerMaus extends MouseAdapter implements ActionListener {
 					if(e.getSource().equals(labelArray[i][j])){
 						/* es wurde auf den Spieler geklickt - schiessen */
 						if(i == playerposition_y && j == playerposition_x){
+							/* gueltiger Klick - stoppe blinken der Felder */
+							if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+								hauptfenster.stopThreadt_field();
+							}
+							/* pruefe ob Munition vorhanden - falls nicht erzeuge Thread um Anzeige zum Blinken zu bringen */
+							if(hauptfenster.getDionaRapModel().getShootAmount() == 0){
+								/* erzeuge neuen Thread falls dieser noch nicht besteht */
+								if(hauptfenster.getThreadt_ammo() == null){
+									hauptfenster.createThreadt_ammo();
+								}
+								else if(!(hauptfenster.getThreadt_ammo().isAlive())){
+									hauptfenster.createThreadt_ammo();				
+								}
+							}							
 							/* Sound fuer Schuss sofern Munition vorhanden*/
 							if(hauptfenster.getDionaRapModel().getShootAmount() > 0){
 								hauptfenster.getSounds().playSoundShoot();
-							}
-							DRController.shoot();
+								DRController.shoot();
+							}							
 							break;
 						}
 						/* es wurde "links unten" geklickt */
 						else if(playerposition_y - i == -1 && playerposition_x -j == 1){
+							/* gueltige Bewegung - stoppe blinken der Felder */
+							if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+								hauptfenster.stopThreadt_field();
+							}
 							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(1);
 						}
 						/* es wurde "unten" geklickt */
 						else if(playerposition_y - i == -1 && playerposition_x -j == 0){
+							/* gueltige Bewegung - stoppe blinken der Felder */
+							if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+								hauptfenster.stopThreadt_field();
+							}	
 							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(2);
 						}
 						/* es wurde "rechts unten" geklickt */
 						else if(playerposition_y - i == -1 && playerposition_x -j == -1){
+							/* gueltige Bewegung - stoppe blinken der Felder */
+							if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+								hauptfenster.stopThreadt_field();
+							}
 							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(3);
 						}						
 						/* es wurde "rechts" geklickt */
 						else if(playerposition_y - i == 0 && playerposition_x -j == -1){
+							/* gueltige Bewegung - stoppe blinken der Felder */
+							if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+								hauptfenster.stopThreadt_field();
+							}	
 							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(6);
 						}
 						/* es wurde "rechts oben" geklickt */
 						else if(playerposition_y - i == 1 && playerposition_x -j == -1){
+							/* gueltige Bewegung - stoppe blinken der Felder */
+							if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+								hauptfenster.stopThreadt_field();
+							}	
 							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(9);
 						}							
 						/* es wurde "oben" geklickt */
 						else if(playerposition_y - i == 1 && playerposition_x -j == 0){
+							/* gueltige Bewegung - stoppe blinken der Felder */
+							if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+								hauptfenster.stopThreadt_field();
+							}								
 							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(8);
 						}
 						/* es wurde "links oben" geklickt */
 						else if(playerposition_y - i == 1 && playerposition_x -j == 1){
+							/* gueltige Bewegung - stoppe blinken der Felder */
+							if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+								hauptfenster.stopThreadt_field();
+							}
 							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(7);
 						}
 						/* es wurde "links" geklickt */
 						else if(playerposition_y - i == 0 && playerposition_x -j == 1){
+							/* gueltige Bewegung - stoppe blinken der Felder */
+							if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+								hauptfenster.stopThreadt_field();
+							}							
 							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(4);
-						}						
+						}
+						/* es wurde auf ein beliebiges anders Feld geklickt */
+						else {
+							/* ueberpruefe ob es ein Objekt t_field gibt */
+							if(hauptfenster.getThreadt_field() == null){
+								hauptfenster.createThreadt_field();
+							}
+							/* es gibt ein Objekt t_field, dieses ist aber nicht mehr aktiv */
+							else if(!(hauptfenster.getThreadt_field().isAlive())){
+								hauptfenster.createThreadt_field();
+							}
+						}
 					}
 				}
 			}

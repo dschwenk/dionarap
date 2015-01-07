@@ -25,11 +25,18 @@ public class ListenerBewegung implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton) e.getSource();
+		
 		/* benoetige DionaRapController um Spieler zu bewegen */
 		Hauptfenster hauptfenster = (Hauptfenster) button.getTopLevelAncestor().getParent();
 		DionaRapController dr_controller = (DionaRapController) hauptfenster.getDionaRapController();
+
 		/* bewege Spieler in entsprechende Richtung */
 		dr_controller.movePlayer(Integer.parseInt(button.getActionCommand()));
+		
+		/* gueltige Bewegung - stoppe blinken der Felder */
+		if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+			hauptfenster.stopThreadt_field();
+		}		
 		
 		/* Sound fuer Bewegung */
 		hauptfenster.getSounds().playSoundMove();

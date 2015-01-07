@@ -5,6 +5,9 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
+import de.fhwgt.dionarap.model.objects.AbstractPawn;
+import de.fhwgt.dionarap.model.objects.Obstacle;
+
 
 /**
  * Klasse realisiert den Thread der fuer das Blinken 
@@ -18,7 +21,6 @@ public class ThreadField extends Thread{
 	private Hauptfenster hauptfenster;
 	
 	private static final int blinkDelay = 500;
-	private boolean run = true;
 	
 	/* Array das die Felder die blinken sollen enthaelt + counter */
 	private JLabel[] blink_arr = new JLabel[8];
@@ -30,7 +32,10 @@ public class ThreadField extends Thread{
 	private int player_pos_x;
 	private int player_pos_y;
 
+	/* Flag ob aktuell geblinkt werden soll */
+	private boolean run = true;
 
+	
 	/**
 	 * Konstruktor
 	 * @param hauptfenster
@@ -86,28 +91,31 @@ public class ThreadField extends Thread{
     public void fillFieldArrayWithNeighboursFields(){
     	/* gehe alle benachbarten Felder durch */
     	
-    	if(!isNeighbourFieldObstacleOrOutside(player_pos_y+1,player_pos_x-1)){
+    	/* links oben */
+    	if(isNeighbourFieldObstacleOrOutside(player_pos_y+1,player_pos_x-1) == false){
     		addBlinkLabel(player_pos_y+1,player_pos_x-1);
     	}
-    	if(!isNeighbourFieldObstacleOrOutside(player_pos_y+1,player_pos_x)){
+    	/* oben */
+    	if(isNeighbourFieldObstacleOrOutside(player_pos_y+1,player_pos_x) == false){
     		addBlinkLabel(player_pos_y+1,player_pos_x);
     	}
-    	if(!isNeighbourFieldObstacleOrOutside(player_pos_y+1,player_pos_x+1)){
+    	/* rechts oben */
+    	if(isNeighbourFieldObstacleOrOutside(player_pos_y+1,player_pos_x+1) == false){
     		addBlinkLabel(player_pos_y+1,player_pos_x+1);
     	}
-    	if(!isNeighbourFieldObstacleOrOutside(player_pos_y,player_pos_x-1)){
+    	if(isNeighbourFieldObstacleOrOutside(player_pos_y,player_pos_x-1) == false){
     		addBlinkLabel(player_pos_y,player_pos_x-1);
     	}
-    	if(!isNeighbourFieldObstacleOrOutside(player_pos_y,player_pos_x+1)){
+    	if(isNeighbourFieldObstacleOrOutside(player_pos_y,player_pos_x+1) == false){
     		addBlinkLabel(player_pos_y,player_pos_x+1);
     	}
-    	if(!isNeighbourFieldObstacleOrOutside(player_pos_y-1,player_pos_x-1)){
+    	if(isNeighbourFieldObstacleOrOutside(player_pos_y-1,player_pos_x-1) == false){
     		addBlinkLabel(player_pos_y-1,player_pos_x-1);
     	}
-    	if(!isNeighbourFieldObstacleOrOutside(player_pos_y-1,player_pos_x)){
-    		addBlinkLabel(player_pos_y,player_pos_x);
+    	if(isNeighbourFieldObstacleOrOutside(player_pos_y-1,player_pos_x) == false){
+    		addBlinkLabel(player_pos_y-1,player_pos_x);
     	}
-    	if(!isNeighbourFieldObstacleOrOutside(player_pos_y-1,player_pos_x+1)){
+    	if(isNeighbourFieldObstacleOrOutside(player_pos_y-1,player_pos_x+1) == false){
     		addBlinkLabel(player_pos_y-1,player_pos_x+1);
     	}    	
     }
@@ -121,8 +129,21 @@ public class ThreadField extends Thread{
      * @return true falls Feld ein Hindernis ist oder ausserhalb des Spielfeld liegt
      */
     public boolean isNeighbourFieldObstacleOrOutside(int y, int x){
-		return false;
-    	
+		
+    	/* sind Koordinaten ausserhalb des Spielfelds */
+		if((y < 0) || (x < 0) || (y > hauptfenster.getDionaRapModel().getGrid().getGridSizeY())	|| (x > hauptfenster.getDionaRapModel().getGrid().getGridSizeX())){
+			return true;
+		}
+		/* ist auf Koordinate ein Hindernis */
+    	AbstractPawn[] spielfiguren = hauptfenster.getPawns();
+		for(int i=0;i<spielfiguren.length;i++){
+			if(spielfiguren[i] instanceof Obstacle){
+				if(spielfiguren[i].getY() == y && spielfiguren[i].getX() == x){
+					return true;
+				}
+			}
+		}
+		return false;    	
     }
 
 
@@ -134,5 +155,13 @@ public class ThreadField extends Thread{
     public void addBlinkLabel(int y, int x){
     	this.blink_arr[count_fields_blink] = spielfeld_arr[y][x];
     	this.count_fields_blink++;
+    }
+
+
+    /**
+     * Methode setzt das run Flag auf false 
+     */
+    public void stopBlink(){
+    	this.run = false;
     }
 }

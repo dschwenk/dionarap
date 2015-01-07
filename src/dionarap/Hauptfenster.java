@@ -435,8 +435,16 @@ public class Hauptfenster extends JFrame {
 	 * Methode startet den Thread fuer das Blinken der Felder
 	 */
 	public void createThreadt_field(){
-		t_field = new ThreadAmmo(this);
+		t_field = new ThreadField(this);
 		t_field.start();
+	}
+	
+	
+	/**
+	 * Methode beendet den Thread fuer das Blinken der Felder
+	 */
+	public void stopThreadt_field(){
+		((ThreadField) t_field).stopBlink();
 	}	
 	
 	
