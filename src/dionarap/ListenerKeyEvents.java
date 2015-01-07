@@ -37,6 +37,22 @@ public class ListenerKeyEvents implements KeyListener {
 
         /* Taste 5 - Schuss */
         if(e.getKeyChar() == '5'){
+    		/* pruefe ob Munition vorhanden - falls nicht erzeuge Thread um Anzeige zum Blinken zu bringen */
+    		if(hauptfenster.getDionaRapModel().getShootAmount() == 0){
+    			/* erzeuge neuen Thread falls dieser noch nicht besteht */
+    			if(hauptfenster.getThreadt_ammo() == null){
+    				hauptfenster.createThreadt_ammo();
+    			}
+    			else if(!(hauptfenster.getThreadt_ammo().isAlive())){
+    				hauptfenster.createThreadt_ammo();				
+    			}
+    		}
+    		
+    		/* Sound fuer Schuss sofern Munition vorhanden*/
+    		if(hauptfenster.getDionaRapModel().getShootAmount() >= 0 || hauptfenster.getDionaRapModel().getShootAmount() == -1){
+    			hauptfenster.getSounds().playSoundShoot();
+    		}        	
+        	
         	dr_controller.shoot();
             System.out.println("Shot " + e.getKeyChar());
         }

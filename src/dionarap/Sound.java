@@ -151,7 +151,11 @@ public class Sound {
 	 * Methode zum Abspielen des Sounds wenn Spiel einen Schuss abgibt
 	 */
 	public void playSoundShoot(){
-		try {
+		try {			
+			clip_shoot.stop();
+			clip_shoot.setFramePosition(0);
+			clip_lasershoot.stop();
+			clip_lasershoot.setFramePosition(0);
 			/* Sound an Theme anpassen */
 			if(this.hauptfenster.getTheme().equals("Dracula")){
 				clip_shoot.start();				
@@ -169,7 +173,7 @@ public class Sound {
 	/**
 	 * Methode stopt alle Sounds
 	 */
-	public void stopSounds(){
+	public void stopAllSounds(){
 		clip_gameWon.stop();
 		clip_gameOver.stop();
 		clip_move.stop();

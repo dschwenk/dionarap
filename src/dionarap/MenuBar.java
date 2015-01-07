@@ -260,25 +260,27 @@ public class MenuBar extends JMenuBar implements ActionListener {
 				/* starte Levelreader (erwartet Instanz der DionaRap Models + MTConfiguration) und uebergebe ausgewaehlte Datei */
 				LevelReader levelreader = new LevelReader(hauptfenster.getMTConfiguration(), hauptfenster.getDionaRapModel());
 				levelreader.readLevel(filechooser.getSelectedFile().toString());
-				/* neues Spielfeld + zeichne Icons & Toolbar aktualisieren */ 
+				/* neues Spielfeld + zeichne Icons */ 
 				hauptfenster.getSpielfeld().addLabelsToSchachbrett();
 				hauptfenster.getSpielfeld().repaintPawns();
-				hauptfenster.getToolbar().updateToolbar();
 				/* setzte neue Mutlithireading Konfiguration */
 				hauptfenster.getDionaRapController().setMultiThreaded(hauptfenster.getDionaRapModel().getActiveConfiguration());
+				/* Toolbar aktualisieren */
+				hauptfenster.getToolbar().updateToolbar();
 				/* Hauuptfenster packen + Navigtor neu positionieren (Spielfeldgroesse hat sich evtl. geaendert) */
 				hauptfenster.pack();
 				hauptfenster.getNavigator().setNavPosition();
 				
-				/* soll nachdem ein Level eingelesen wurde beim naechsten neuen Spiel diese Daten uebenrommen werden oder "Standardspiel" gestartet werden??
+				// soll nachdem ein Level eingelesen wurde beim naechsten neuen Spiel diese Daten uebenrommen werden oder "Standardspiel" gestartet werden??
+				/*
 				hauptfenster.updateGameSettings(
 						hauptfenster.getDionaRapModel().getGrid().getGridSizeY(),
 						hauptfenster.getDionaRapModel().getGrid().getGridSizeX(),
 						hauptfenster.getDionaRapModel().getOpponentCount(),
 						hauptfenster.getDionaRapModel().getObstacles().size()
-						hauptfenster.setFlagGameSettingsChanged();
 				);
-				*/
+				hauptfenster.setFlagGameSettingsChanged();
+				*/				
 			}
 		}
 		

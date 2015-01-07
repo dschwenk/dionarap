@@ -216,8 +216,8 @@ public class Hauptfenster extends JFrame {
 			playerchoice = JOptionPane.showOptionDialog(this, "Gewonnen", "Spiel gewonnen!", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, win, playerchoicestrings, "Neues Spiel");
 		}
 		
-		/* Sound beenden */
-		this.getSounds().stopSounds();
+		/* alle Sounds beenden */
+		this.getSounds().stopAllSounds();
 		
 		/* Werte gedrueckten Dialogbutton aus */
 		if(playerchoice == 0){
