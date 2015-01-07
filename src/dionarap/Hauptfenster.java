@@ -153,7 +153,7 @@ public class Hauptfenster extends JFrame {
 		/* Initialisierung Controller */
 		this.DionaRap_Controller = new DionaRapController(DionaRap_Model);
 		
-		/* Multithreading Konfiguraiton initialisieren und aktivieren */
+		/* Multithreading Konfiguraiton initialisieren (bzw. Werte aus dem Einstellungsdialog uebernehmen) und aktivieren */
 		if(game_settings_changed == false){
 			this.initializeMTConfiguration();
 		}
@@ -182,6 +182,7 @@ public class Hauptfenster extends JFrame {
 		MTConf.setDynamicOpponentWaitTime(false);
 	}
 	
+
 	/**
 	 * Methode zur Darstellung des Dialogs fuer die Anzeige der
 	 * Spielergebnisse ("Game Over" und "Gewonnen")
@@ -220,16 +221,27 @@ public class Hauptfenster extends JFrame {
 		
 		/* Werte gedrueckten Dialogbutton aus */
 		if(playerchoice == 0){
-			/* neues Spiel -> Model und Controller neu initialisieren + Spielfeld neu darstellen */
-			this.initializeDionaRap();
-			/* Button neues Spiel deaktivieren, packen + Navigator positionieren */
-			this.getToolbar().setButtonNSDisabled();
-			this.pack();			
-			this.navigator.setNavPosition();			
+			startNewGame();			
 		}
 		else {
 			this.getToolbar().setButtonNSEnabled();
 		}
+	}
+	
+	
+	/**
+	 * Methode startet ein neues Spiel - Model + Controller werden
+	 * initialisiert, Spielfeld wird neu gezeichnet und die Toolbar
+	 * positioniert
+	 */
+	public void startNewGame(){
+		/* neues Spiel -> Model und Controller neu initialisieren + Spielfeld neu darstellen */
+		this.initializeDionaRap();
+		/* Button neues Spiel deaktivieren, packen + Navigator positionieren */
+		this.getToolbar().setButtonNSDisabled();
+		this.pack();			
+		this.navigator.setNavPosition();
+		this.requestFocus();
 	}
 
 
@@ -414,5 +426,14 @@ public class Hauptfenster extends JFrame {
 	 */
 	public Sound getSounds(){
 		return this.sounds;
+	}
+	
+	
+	/**
+	 * Methode setzt das Flag fuer die Spieleinstellungen auf true wenn
+	 * diese geaendert wurden
+	 */
+	public void setFlagGameSettingsChanged(){
+		this.game_settings_changed = true;
 	}
 }

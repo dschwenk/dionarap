@@ -276,6 +276,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
 						hauptfenster.getDionaRapModel().getGrid().getGridSizeX(),
 						hauptfenster.getDionaRapModel().getOpponentCount(),
 						hauptfenster.getDionaRapModel().getObstacles().size()
+						hauptfenster.setFlagGameSettingsChanged();
 				);
 				*/
 			}
