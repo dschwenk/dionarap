@@ -52,8 +52,9 @@ public class Hauptfenster extends JFrame {
     /* Flag ob Spieleinstellungen angepasst wurden */
 	private boolean game_settings_changed = false;
 	
-	/* Thread - blinken der Munitionsanzeige */
+	/* Threads - blinken der Munitionsanzeige + Spielfelder */
 	private Thread t_ammo;
+	private Thread t_field;
 	
 	/* Sound */
 	private Sound sounds;
@@ -419,6 +420,24 @@ public class Hauptfenster extends JFrame {
 		t_ammo = new ThreadAmmo(this);
 		t_ammo.start();
 	}
+	
+	
+	/**
+	 * Gibt den Thread fuer das Blinken der Felder zurueck
+	 * @return Thread
+	 */
+	public Thread getThreadt_field(){
+		return t_field;		
+	}
+
+	
+	/**
+	 * Methode startet den Thread fuer das Blinken der Felder
+	 */
+	public void createThreadt_field(){
+		t_field = new ThreadAmmo(this);
+		t_field.start();
+	}	
 	
 	
 	/**
