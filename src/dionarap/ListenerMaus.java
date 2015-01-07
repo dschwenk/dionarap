@@ -13,6 +13,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import de.fhwgt.dionarap.controller.DionaRapController;
+import de.fhwgt.dionarap.model.objects.AbstractPawn;
+import de.fhwgt.dionarap.model.objects.Obstacle;
+import de.fhwgt.dionarap.model.objects.Player;
 
 
 /**
@@ -148,73 +151,185 @@ public class ListenerMaus extends MouseAdapter implements ActionListener {
 						}
 						/* es wurde "links unten" geklickt */
 						else if(playerposition_y - i == -1 && playerposition_x -j == 1){
-							/* gueltige Bewegung - stoppe blinken der Felder */
-							if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
-								hauptfenster.stopThreadt_field();
+							/* pruefe ob auf dem Feld ein Hindernis ist */
+							if(isThereAnObstacle(i,j)){
+								/* ueberpruefe ob es ein Objekt t_field gibt */
+								if(hauptfenster.getThreadt_field() == null){
+									hauptfenster.createThreadt_field();
+								}
+								/* es gibt ein Objekt t_field, dieses ist aber nicht mehr aktiv */
+								else if(!(hauptfenster.getThreadt_field().isAlive())){
+									hauptfenster.createThreadt_field();
+								}
+							}
+							/* kein Hindernis */
+							else {
+								/* gueltige Bewegung - stoppe blinken der Felder */
+								if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+									hauptfenster.stopThreadt_field();
+								}														
 							}
 							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(1);
 						}
 						/* es wurde "unten" geklickt */
 						else if(playerposition_y - i == -1 && playerposition_x -j == 0){
-							/* gueltige Bewegung - stoppe blinken der Felder */
-							if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
-								hauptfenster.stopThreadt_field();
-							}	
+							/* pruefe ob auf dem Feld ein Hindernis ist */
+							if(isThereAnObstacle(i,j)){
+								/* ueberpruefe ob es ein Objekt t_field gibt */
+								if(hauptfenster.getThreadt_field() == null){
+									hauptfenster.createThreadt_field();
+								}
+								/* es gibt ein Objekt t_field, dieses ist aber nicht mehr aktiv */
+								else if(!(hauptfenster.getThreadt_field().isAlive())){
+									hauptfenster.createThreadt_field();
+								}
+							}
+							/* kein Hindernis */
+							else {
+								/* gueltige Bewegung - stoppe blinken der Felder */
+								if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+									hauptfenster.stopThreadt_field();
+								}														
+							}
 							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(2);
 						}
 						/* es wurde "rechts unten" geklickt */
 						else if(playerposition_y - i == -1 && playerposition_x -j == -1){
-							/* gueltige Bewegung - stoppe blinken der Felder */
-							if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
-								hauptfenster.stopThreadt_field();
+							/* pruefe ob auf dem Feld ein Hindernis ist */
+							if(isThereAnObstacle(i,j)){
+								/* ueberpruefe ob es ein Objekt t_field gibt */
+								if(hauptfenster.getThreadt_field() == null){
+									hauptfenster.createThreadt_field();
+								}
+								/* es gibt ein Objekt t_field, dieses ist aber nicht mehr aktiv */
+								else if(!(hauptfenster.getThreadt_field().isAlive())){
+									hauptfenster.createThreadt_field();
+								}
+							}
+							/* kein Hindernis */
+							else {
+								/* gueltige Bewegung - stoppe blinken der Felder */
+								if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+									hauptfenster.stopThreadt_field();
+								}														
 							}
 							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(3);
 						}						
 						/* es wurde "rechts" geklickt */
 						else if(playerposition_y - i == 0 && playerposition_x -j == -1){
-							/* gueltige Bewegung - stoppe blinken der Felder */
-							if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
-								hauptfenster.stopThreadt_field();
-							}	
+							/* pruefe ob auf dem Feld ein Hindernis ist */
+							if(isThereAnObstacle(i,j)){
+								/* ueberpruefe ob es ein Objekt t_field gibt */
+								if(hauptfenster.getThreadt_field() == null){
+									hauptfenster.createThreadt_field();
+								}
+								/* es gibt ein Objekt t_field, dieses ist aber nicht mehr aktiv */
+								else if(!(hauptfenster.getThreadt_field().isAlive())){
+									hauptfenster.createThreadt_field();
+								}
+							}
+							/* kein Hindernis */
+							else {
+								/* gueltige Bewegung - stoppe blinken der Felder */
+								if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+									hauptfenster.stopThreadt_field();
+								}														
+							}
 							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(6);
 						}
 						/* es wurde "rechts oben" geklickt */
 						else if(playerposition_y - i == 1 && playerposition_x -j == -1){
-							/* gueltige Bewegung - stoppe blinken der Felder */
-							if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
-								hauptfenster.stopThreadt_field();
-							}	
+							/* pruefe ob auf dem Feld ein Hindernis ist */
+							if(isThereAnObstacle(i,j)){
+								/* ueberpruefe ob es ein Objekt t_field gibt */
+								if(hauptfenster.getThreadt_field() == null){
+									hauptfenster.createThreadt_field();
+								}
+								/* es gibt ein Objekt t_field, dieses ist aber nicht mehr aktiv */
+								else if(!(hauptfenster.getThreadt_field().isAlive())){
+									hauptfenster.createThreadt_field();
+								}
+							}
+							/* kein Hindernis */
+							else {
+								/* gueltige Bewegung - stoppe blinken der Felder */
+								if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+									hauptfenster.stopThreadt_field();
+								}														
+							}
 							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(9);
 						}							
 						/* es wurde "oben" geklickt */
 						else if(playerposition_y - i == 1 && playerposition_x -j == 0){
-							/* gueltige Bewegung - stoppe blinken der Felder */
-							if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
-								hauptfenster.stopThreadt_field();
-							}								
+							/* pruefe ob auf dem Feld ein Hindernis ist */
+							if(isThereAnObstacle(i,j)){
+								/* ueberpruefe ob es ein Objekt t_field gibt */
+								if(hauptfenster.getThreadt_field() == null){
+									hauptfenster.createThreadt_field();
+								}
+								/* es gibt ein Objekt t_field, dieses ist aber nicht mehr aktiv */
+								else if(!(hauptfenster.getThreadt_field().isAlive())){
+									hauptfenster.createThreadt_field();
+								}
+							}
+							/* kein Hindernis */
+							else {
+								/* gueltige Bewegung - stoppe blinken der Felder */
+								if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+									hauptfenster.stopThreadt_field();
+								}														
+							}
 							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(8);
 						}
 						/* es wurde "links oben" geklickt */
 						else if(playerposition_y - i == 1 && playerposition_x -j == 1){
-							/* gueltige Bewegung - stoppe blinken der Felder */
-							if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
-								hauptfenster.stopThreadt_field();
+							/* pruefe ob auf dem Feld ein Hindernis ist */
+							if(isThereAnObstacle(i,j)){
+								/* ueberpruefe ob es ein Objekt t_field gibt */
+								if(hauptfenster.getThreadt_field() == null){
+									hauptfenster.createThreadt_field();
+								}
+								/* es gibt ein Objekt t_field, dieses ist aber nicht mehr aktiv */
+								else if(!(hauptfenster.getThreadt_field().isAlive())){
+									hauptfenster.createThreadt_field();
+								}
+							}
+							/* kein Hindernis */
+							else {
+								/* gueltige Bewegung - stoppe blinken der Felder */
+								if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+									hauptfenster.stopThreadt_field();
+								}														
 							}
 							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(7);
 						}
 						/* es wurde "links" geklickt */
-						else if(playerposition_y - i == 0 && playerposition_x -j == 1){
-							/* gueltige Bewegung - stoppe blinken der Felder */
-							if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
-								hauptfenster.stopThreadt_field();
-							}							
+						else if(playerposition_y - i == 0 && playerposition_x -j == 1){							
+							/* pruefe ob auf dem Feld ein Hindernis ist */
+							if(isThereAnObstacle(i,j)){
+								/* ueberpruefe ob es ein Objekt t_field gibt */
+								if(hauptfenster.getThreadt_field() == null){
+									hauptfenster.createThreadt_field();
+								}
+								/* es gibt ein Objekt t_field, dieses ist aber nicht mehr aktiv */
+								else if(!(hauptfenster.getThreadt_field().isAlive())){
+									hauptfenster.createThreadt_field();
+								}
+							}
+							/* kein Hindernis */
+							else {
+								/* gueltige Bewegung - stoppe blinken der Felder */
+								if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
+									hauptfenster.stopThreadt_field();
+								}														
+							}
 							hauptfenster.getSounds().playSoundMove();
 							DRController.movePlayer(4);
 						}
@@ -233,5 +348,27 @@ public class ListenerMaus extends MouseAdapter implements ActionListener {
 				}
 			}
 		}
+	}
+	
+	
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * @return
+	 */
+	public boolean isThereAnObstacle(int i, int j){
+		AbstractPawn[] dionaRap_Pawns = hauptfenster.getPawns();
+		for(int k=0;k < dionaRap_Pawns.length;k++){
+			if(dionaRap_Pawns[k] instanceof Obstacle){
+				/* erfrage Position der Figur */
+				int posX = dionaRap_Pawns[k].getX();
+				int posY = dionaRap_Pawns[k].getY();							
+				if((posY == i) && (posX == j)){
+					return true;
+				}									
+			}
+		}
+		return false;
 	}
 }

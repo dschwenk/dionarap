@@ -59,7 +59,7 @@ public class ThreadField extends Thread{
 	 * Methode ist fuer das Blinken der Felder zustaendig
 	 */
     public void run(){
-        /* so lange noch keine 3 Sekunden vergangen sind und geblinkt werden soll (keine gueltige Bewebung in der Zwischenzeit */
+        /* so lange noch keine 3 Sekunden vergangen sind und geblinkt werden soll (keine gueltige Bewegung in der Zwischenzeit */
     	for(int i=0;(i<6) && run;i++){
             for(int k=0;k<count_fields_blink;k++){
                 /* abwechselnd Rand hinzufuegen / entfernen */
