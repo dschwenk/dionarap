@@ -1,6 +1,5 @@
 package dionarap;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -15,7 +14,6 @@ import javax.swing.JPopupMenu;
 import de.fhwgt.dionarap.controller.DionaRapController;
 import de.fhwgt.dionarap.model.objects.AbstractPawn;
 import de.fhwgt.dionarap.model.objects.Obstacle;
-import de.fhwgt.dionarap.model.objects.Player;
 
 
 /**
@@ -24,7 +22,7 @@ import de.fhwgt.dionarap.model.objects.Player;
  * das Interface <code>ActionListener</code>. 
  *   
  * @author Daniel Schwenk
- * @version Aufgabe 5
+ * @version Aufgabe 7
  */
 public class ListenerMaus extends MouseAdapter implements ActionListener {
 

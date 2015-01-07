@@ -48,7 +48,9 @@ class ThreadAmmo extends Thread {
 			try {
 				/* Thread schlafen legen */
 				Thread.sleep(blinkDelay);
-			} catch (InterruptedException ex) {}
+			} catch (InterruptedException ex) {
+				System.out.println("Catched exception in Thread Ammo.");
+			}
 		}
     }
 }

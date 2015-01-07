@@ -24,7 +24,7 @@ import javax.swing.JToolBar;
  * Klasse realisiert die Toolbar, abgeleitet von <code>JToolBar</code>
  * 
  * @author Daniel Schwenk
- * @version Aufgabe 5
+ * @version Aufgabe 7
  */
 public class Toolbar extends JToolBar {
 	
@@ -114,7 +114,8 @@ public class Toolbar extends JToolBar {
 		bestenliste.addActionListener(new ListenerToolbar());
 		this.add(bestenliste);
 	}
-	
+
+
 	/**
 	 * Zeige Bestenliste an
 	 */
@@ -149,7 +150,7 @@ public class Toolbar extends JToolBar {
 		frameBestenliste.setSize(300,300);
 		frameBestenliste.setVisible(true);    
 	}
-	
+
 
 	/**
 	 * Methode stellt die Munitionsanzeige in der Toolbar dar
@@ -206,14 +207,14 @@ public class Toolbar extends JToolBar {
 		/* Anzeige an Look & Fell anpassen */
 		munition.updateUI();
 	}
-	
-	
+
+
 	public void updateToolbar(){
 		setScoreFieldText();
 		setProgressBarValue();
 		paintMunitionsAnzeige();
 	}
-	
+
 
 	/**
 	 * Methode um den Button "Neues Spiel" zu aktivieren
@@ -222,7 +223,7 @@ public class Toolbar extends JToolBar {
     public void setButtonNSEnabled() {
     	neuesspiel.setEnabled(true);
     }
-   
+
 
 	/**
 	 * Methode um den Button "Neues Spiel" zu deaktivieren
@@ -241,7 +242,7 @@ public class Toolbar extends JToolBar {
     	punktestandtext.setText(String.valueOf(hauptfenster.getDionaRapModel().getScore()));
     }
 
-   
+  
 	/**
 	 * Methode um den aktuellen Fortschritt zu setzen
 	 * @param int progress aktueller Fortschritt
@@ -249,14 +250,16 @@ public class Toolbar extends JToolBar {
 	public void setProgressBarValue(){
 		fortschrittsbalken.setValue(hauptfenster.getGameProgress());
 	}
-	
+
+
 	/**
 	 * Methode macht die Toolbar sichtbar
 	 */
 	public void showToolbar(){
 		this.setVisible(true);
 	}
-	
+
+
 	/**
 	 * Methode macht die Toolbar unsichtbar
 	 */
@@ -264,6 +267,7 @@ public class Toolbar extends JToolBar {
 		this.setVisible(false);
 	}
 	
+
 	/**
 	 * Methode gibt das Array fuer die Labels der Munitionsanzeige zurueck
 	 * @return JLabel[]
@@ -271,13 +275,13 @@ public class Toolbar extends JToolBar {
 	public JLabel[] getMuniJLabelArr(){
 		return munition_arr;
 	}
-	
+
+
 	/**
 	 * Methode gibt das Panel fuer die Munitionsanzeige zurueck
 	 * @return
 	 */
 	public JPanel getMuniJPanel(){
 		return munition;		
-	}
-	
+	}	
 }

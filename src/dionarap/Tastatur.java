@@ -15,13 +15,10 @@ import javax.swing.JPanel;
  * Klasse realisiert die Buttons zur Steuerung, abgeleitet von <code>JPanel</code>
  * 
  * @author Daniel Schwenk
- * @version Aufgabe 4
+ * @version Aufgabe 7
  */
 public class Tastatur extends JPanel {
 
-	private static final long serialVersionUID = 1L;
-	
-	
 	/**
 	 * Konstruktor der Tastatur vom Typ <code>JPanel</code>
 	 * Legt das Layout fest und ordnet die Steuertasten entprechend des Nummernblocks der Tastatur an.

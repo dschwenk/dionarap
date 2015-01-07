@@ -38,14 +38,14 @@ public class ListenerWaffe implements ActionListener {
 				hauptfenster.createThreadt_ammo();				
 			}
 		}
-		
+
 		/* Sound fuer Schuss sofern Munition vorhanden*/
 		if(hauptfenster.getDionaRapModel().getShootAmount() >= 0 || hauptfenster.getDionaRapModel().getShootAmount() == -1){
 			hauptfenster.getSounds().playSoundShoot();
 		}		
-		
+
 		dr_controller.shoot();
-		
+
         System.out.println("Shoot " + button.getActionCommand());
 		hauptfenster.requestFocus();
 	}

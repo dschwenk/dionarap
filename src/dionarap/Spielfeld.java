@@ -103,7 +103,7 @@ public class Spielfeld extends JPanel {
 						this.Schachbrett[zeile][spalte].setBackground(Color.black);						
 					}					
 				}
-				
+
 				/* Label deckend darstellen */
 				this.Schachbrett[zeile][spalte].setOpaque(true);
 				/* Listener registrieren */
@@ -113,6 +113,7 @@ public class Spielfeld extends JPanel {
 			}
 		}
 	}
+
 
 	/**
 	 * Methode aktualisiert das Theme
@@ -160,7 +161,7 @@ public class Spielfeld extends JPanel {
 		this.removeIconsFromSpielfeld();
 		this.paintPawns(this.hauptfenster.getPawns());
 	}
-	
+
 
 	/**
 	 * Löscht die Icons vom Spielfeld
@@ -176,7 +177,7 @@ public class Spielfeld extends JPanel {
 			}			
 		}
 	}
-	
+
 
 	/**
 	 * Löscht die Lables vom Spielfeld
@@ -237,7 +238,7 @@ public class Spielfeld extends JPanel {
 					Schachbrett[posY][posX].setIcon(iconPlayer9);
 				}
 			}
-			
+
 			/* Figur ist ein Gegner */
 			else if(dionaRap_Pawns[i] instanceof Opponent){
 				//Schachbrett[posY][posX].setText("G");

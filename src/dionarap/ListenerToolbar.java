@@ -1,11 +1,9 @@
 package dionarap;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 
 
 /**
@@ -13,7 +11,7 @@ import javax.swing.JFrame;
  * dazu das Interface <code>ActionListener</code>. 
  *   
  * @author Daniel Schwenk
- * @version Aufgabe 4
+ * @version Aufgabe 7
  */
 public class ListenerToolbar implements ActionListener {
 

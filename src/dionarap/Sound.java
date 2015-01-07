@@ -116,7 +116,8 @@ public class Sound {
 			System.out.println("Fehler beim Abspielen des Clips 'GameWon'" + ex);
 		}
 	}	
-	
+
+
 	/**
 	 * Methode zum Abspielen des Sounds wenn Spiel verloren wurde
 	 */
@@ -130,8 +131,8 @@ public class Sound {
 			System.out.println("Fehler beim Abspielen des Clips 'GameOver'" + ex);
 		}
 	}
-	
-	
+
+
 	/**
 	 * Methode zum Abspielen des Sounds wenn der Spieler sich bewegt
 	 */
@@ -145,8 +146,8 @@ public class Sound {
 			System.out.println("Fehler beim Abspielen des Clips 'Maustatste'" + ex);
 		}
 	}	
-	
-	
+
+
 	/**
 	 * Methode zum Abspielen des Sounds wenn Spiel einen Schuss abgibt
 	 */
@@ -168,8 +169,8 @@ public class Sound {
 			System.out.println("Fehler beim Abspielen des Clips 'GameOver'" + ex);
 		}
 	}
-	
-	
+
+
 	/**
 	 * Methode stopt alle Sounds
 	 */

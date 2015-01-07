@@ -14,7 +14,7 @@ import de.fhwgt.dionarap.controller.DionaRapController;
  * dazu das Interface <code>ActionListener</code>. 
  *   
  * @author Daniel Schwenk
- * @version Aufgabe 4
+ * @version Aufgabe 7
  */
 public class ListenerBewegung implements ActionListener {
 
@@ -23,9 +23,9 @@ public class ListenerBewegung implements ActionListener {
 	 * Bewegungsbuttons 1-4 & 6-9
 	 * @param e Button der das Event ausgeloest hat
 	 */
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e){
 		JButton button = (JButton) e.getSource();
-		
+
 		/* benoetige DionaRapController um Spieler zu bewegen */
 		Hauptfenster hauptfenster = (Hauptfenster) button.getTopLevelAncestor().getParent();
 		DionaRapController dr_controller = (DionaRapController) hauptfenster.getDionaRapController();
@@ -33,10 +33,10 @@ public class ListenerBewegung implements ActionListener {
 		/* akutelle Spielerposition */
 		int playerposition_x = hauptfenster.getPlayer().getX();
 		int playerposition_y = hauptfenster.getPlayer().getY();
-		
+
 		/* bewege Spieler in entsprechende Richtung */
 		dr_controller.movePlayer(Integer.parseInt(button.getActionCommand()));
-		
+
 		/* gueltige Bewegung - stoppe blinken der Felder */
 		if((hauptfenster.getThreadt_field() != null) && (hauptfenster.getThreadt_field().isAlive())){
 			hauptfenster.stopThreadt_field();
@@ -50,7 +50,7 @@ public class ListenerBewegung implements ActionListener {
 		if((playerposition_x == hauptfenster.getPlayer().getX()) && playerposition_y == (hauptfenster.getPlayer().getY())){
             hauptfenster.createThreadt_field();
         }
-                
+
         System.out.println("Move " + button.getActionCommand());
 		hauptfenster.requestFocus();
 	}

@@ -11,7 +11,7 @@ import de.fhwgt.dionarap.controller.DionaRapController;
  * dazu das Interface <code>KeyListener</code>. 
  *   
  * @author Daniel Schwenk
- * @version Aufgabe 4
+ * @version Aufgabe 7
  */
 public class ListenerKeyEvents implements KeyListener {
 
@@ -83,13 +83,13 @@ public class ListenerKeyEvents implements KeyListener {
     		/* hat sich die Spielerposition zur vorherigen Positiongeaendert */
     		if((playerposition_x == hauptfenster.getPlayer().getX()) && playerposition_y == (hauptfenster.getPlayer().getY())){
                 hauptfenster.createThreadt_field();
-            }        	
-        	
+            }
+
         	System.out.println("Move " + e.getKeyChar());
         }
         /* beliebige andere Taste */
         else {
             System.out.println(e.getKeyChar());
-        }		
+        }
 	}
 }

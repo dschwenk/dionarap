@@ -18,13 +18,10 @@ import de.fhwgt.dionarap.controller.DionaRapController;
  * Hauptfenster von DionaRap. Enthält die main()-Methode.
  * 
  * @author Daniel Schwenk
- * @version Aufgabe 5
+ * @version Aufgabe 7
  */
 public class Hauptfenster extends JFrame {
 	
-	/* The serializable class Hauptfenster does not declare a static final serialVersionUID field of type long */
-	private static final long serialVersionUID = 1L;
-
 	/* Titel */
 	private static String titel = "DionaRap";
 	
@@ -267,12 +264,24 @@ public class Hauptfenster extends JFrame {
 	
 
 	/**
+	 * Methode aktualisiert die Groesse des Spielfelds, Anzahl an Gegnern + Hindernisse
+	 * @param int y, int x, int opponents, int obstacles - Groesse des Felds in x- und y-Richtung, Anzahl an Gegner + Hindernisse
+	 */
+	public void updateGameSettings(int y, int x, int opponents, int obstacles){
+		this.grid = new Grid(y,x);
+		this.opponents = opponents;
+		this.obstacles = obstacles;
+	}
+	
+
+	/**
 	 * Gibt den Controller zurueck. 
 	 * @return DionaRapController
 	 */
 	public DionaRapController getDionaRapController(){
 		return DionaRap_Controller;
 	}
+
 
 	/**
 	 * Gibt das Model zurueck. 
@@ -282,6 +291,7 @@ public class Hauptfenster extends JFrame {
 		return DionaRap_Model;
 	}
 	
+
 	/**
 	 * Gibt Array mit Spielfiguren zurueck. 
 	 * @return all Pawns
@@ -289,7 +299,8 @@ public class Hauptfenster extends JFrame {
 	public AbstractPawn[] getPawns(){
 		return this.DionaRap_Model.getAllPawns();
 	}
-	
+
+
 	/**
 	 * Gibt Spieler zurueck. 
 	 * @return Spieler
@@ -297,7 +308,8 @@ public class Hauptfenster extends JFrame {
 	public Player getPlayer(){
 		return this.DionaRap_Model.getPlayer();
 	}
-	
+
+
 	/**
 	 * Gibt Toolbar zurueck. 
 	 * @return Toolbar
@@ -305,7 +317,8 @@ public class Hauptfenster extends JFrame {
 	public Toolbar getToolbar(){
 		return this.toolbar;
 	}
-	
+
+
 	/**
 	 * Gibt Spielfeld zurueck. 
 	 * @return Spielfeld
@@ -313,7 +326,8 @@ public class Hauptfenster extends JFrame {
 	public Spielfeld getSpielfeld(){
 		return this.spielfeld;
 	}
-	
+
+
 	/**
 	 * Gibt Navigator zurueck. 
 	 * @return Navigator
@@ -330,7 +344,8 @@ public class Hauptfenster extends JFrame {
 	public MTConfiguration getMTConfiguration(){
 		return Hauptfenster.MTConf;
 	}		
-	
+
+
 	/**
 	 * Gibt den aktuellen Spielfortschritt zurueck
 	 * @return int progress
@@ -340,7 +355,8 @@ public class Hauptfenster extends JFrame {
 		float progress = ((opponents - (float)DionaRap_Model.getOpponentCount()) / opponents) * 100;
 		return (int)progress;
 	}
-	
+
+
 	/**
 	 * Gibt das Spielverzeichnis zurueck
 	 * @return String spieleverzeichnis
@@ -359,7 +375,8 @@ public class Hauptfenster extends JFrame {
 	public String getTheme(){
 		return this.theme;
 	}
-	
+
+
 	/**
 	 * Setzt das Theme
 	 * @param String theme
@@ -368,7 +385,8 @@ public class Hauptfenster extends JFrame {
 		this.theme = theme;
 		this.spielfeld.changeTheme();
 	}
-	
+
+
 	/**
 	 * Methode gibt das Grid fuer die Spielfeldgroesse zurueck
 	 * @return 
@@ -384,7 +402,8 @@ public class Hauptfenster extends JFrame {
 	public int getOpponentCount(){
 		return this.opponents;
 	}
-	
+
+
 	/**
 	 * Methode gibt die Anzahl der Hindernisse zurueck
 	 */
@@ -394,13 +413,11 @@ public class Hauptfenster extends JFrame {
 	
 	
 	/**
-	 * Methode aktualisiert die Groesse des Spielfelds, Anzahl an Gegnern + Hindernisse
-	 * @param int y, int x, int opponents, int obstacles - Groesse des Felds in x- und y-Richtung, Anzahl an Gegner + Hindernisse
+	 * Methode setzt das Flag fuer die Spieleinstellungen auf true wenn
+	 * diese geaendert wurden
 	 */
-	public void updateGameSettings(int y, int x, int opponents, int obstacles){
-		this.grid = new Grid(y,x);
-		this.opponents = opponents;
-		this.obstacles = obstacles;
+	public void setFlagGameSettingsChanged(){
+		this.game_settings_changed = true;
 	}
 	
 	
@@ -453,14 +470,5 @@ public class Hauptfenster extends JFrame {
 	 */
 	public Sound getSounds(){
 		return this.sounds;
-	}
-	
-	
-	/**
-	 * Methode setzt das Flag fuer die Spieleinstellungen auf true wenn
-	 * diese geaendert wurden
-	 */
-	public void setFlagGameSettingsChanged(){
-		this.game_settings_changed = true;
 	}
 }

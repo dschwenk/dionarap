@@ -8,7 +8,7 @@ import java.awt.event.ComponentListener;
  * dazu das Interface <code>ComponentListener</code>. 
  *   
  * @author Daniel Schwenk
- * @version Aufgabe 4
+ * @version Aufgabe 7
  */
 public class ListenerFenster implements ComponentListener {
 	

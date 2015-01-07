@@ -244,7 +244,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
 				hauptfenster.pack();
 			}
 		}
-		
+
 		/* Levelreader XML einlesen */
 		if(e.getSource() == leveleinlesen){
 			/* Filechooser mit XML-Filter */
@@ -279,15 +279,15 @@ public class MenuBar extends JMenuBar implements ActionListener {
 				hauptfenster.setFlagGameSettingsChanged();
 			}
 		}
-		
+
 		/* Spieleinstellungen-Dialog anzeigen */
 		if(e.getSource() == spieleinstellungen){
 			new Spieleinstellungen(hauptfenster);
 		}
-		
+
 		/* anzeigen der Spielbeschreibung */
 		if(e.getSource() == spielbeschreibung){
-				new Spielebeschreibung(hauptfenster);
+			new Spielebeschreibung(hauptfenster);
 		}		
 	}
 }

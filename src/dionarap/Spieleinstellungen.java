@@ -38,6 +38,8 @@ public class Spieleinstellungen extends JDialog implements ActionListener {
 	public Spieleinstellungen(Hauptfenster hauptfenster){
 		this.hauptfenster = hauptfenster;
 		
+		this.setTitle("Spieleinstellungen");
+		
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(11, 2));
 		

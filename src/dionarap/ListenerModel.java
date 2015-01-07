@@ -13,10 +13,10 @@ import de.fhwgt.dionarap.model.listener.DionaRapListener;
 
 
 /**
- * Klasse realisiert den Listener fuer Events die durch das Aendern des DionaRapModels entstehen und implementiert
- *  das Interface <code>DionaRapListener</code>. 
+ * Klasse realisiert den Listener fuer Events die durch das Aendern des DionaRapModels entstehen - implementiert
+ * das Interface <code>DionaRapListener</code>. 
  * @author Daniel Schwenk
- * @version Aufgabe 4
+ * @version Aufgabe 7
  */
 public class ListenerModel implements DionaRapListener {
 

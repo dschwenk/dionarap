@@ -12,7 +12,7 @@ import javax.swing.JWindow;
  * Klasse realisiert das Navigationsfenster, abgeleitet von <code>JWindow</code>
  * 
  * @author Daniel Schwenk
- * @version Aufgabe 5
+ * @version Aufgabe 7
  */
 public class Navigator extends JWindow {
 
@@ -88,7 +88,8 @@ public class Navigator extends JWindow {
 	public void showNavigator(){
 		this.setVisible(true);
 	}
-	
+
+
 	/**
 	 * Methode macht den Navigator unsichtbar
 	 */

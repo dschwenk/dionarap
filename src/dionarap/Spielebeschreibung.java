@@ -16,7 +16,7 @@ import javax.swing.JScrollPane;
  * Klasse realisiert die Darstellung der Spielbeschreibung, abgeleitet von  <code>JDialog</code>
  * 
  * @author Daniel Schwenk
- * @version Aufgabe 5
+ * @version Aufgabe 7
  */
 public class Spielebeschreibung extends JDialog {
 
