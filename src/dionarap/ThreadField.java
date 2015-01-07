@@ -11,7 +11,7 @@ import de.fhwgt.dionarap.model.objects.Obstacle;
 
 /**
  * Klasse realisiert den Thread der fuer das Blinken 
- * einzelner Spielfeldfelder zustaendig ist, abgleitet von <code>Thread /code>
+ * einzelner Spielfeldfelder zustaendig ist, abgleitet von <code>Thread</code>
  * 
  * @author Daniel Schwenk
  * @version Aufgabe 7

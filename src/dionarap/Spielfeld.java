@@ -56,6 +56,7 @@ public class Spielfeld extends JPanel {
 	/**
 	 * Konstruktor des Spielfelds vom Type <code>JPanel</code>
 	 * Erstellt ein Spielfeld / Schachbrett mit x * y Feldern
+	 * @param das Vaterfenster
 	 */		
 	public Spielfeld(Hauptfenster hauptfenster){
 		

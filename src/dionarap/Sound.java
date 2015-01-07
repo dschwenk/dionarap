@@ -36,7 +36,7 @@ public class Sound {
 	
 	/**
 	 * Konstruktor der Klasse Sound
-	 * @throws IOException 
+	 * @param das Vaterfenster
 	 */
 	public Sound(Hauptfenster hauptfenster){
 		

@@ -236,7 +236,6 @@ public class Toolbar extends JToolBar {
 
 	/**
 	 * Methode um den aktuellen Punktestand zu setzen
-	 * @param int punktestand aktueller Punktestand
 	 */
     public void setScoreFieldText(){
     	punktestandtext.setText(String.valueOf(hauptfenster.getDionaRapModel().getScore()));
@@ -245,7 +244,6 @@ public class Toolbar extends JToolBar {
   
 	/**
 	 * Methode um den aktuellen Fortschritt zu setzen
-	 * @param int progress aktueller Fortschritt
 	 */
 	public void setProgressBarValue(){
 		fortschrittsbalken.setValue(hauptfenster.getGameProgress());
@@ -279,7 +277,7 @@ public class Toolbar extends JToolBar {
 
 	/**
 	 * Methode gibt das Panel fuer die Munitionsanzeige zurueck
-	 * @return
+	 * @return JPanel gibt das JPanel der Munitionsanzeige zurueck
 	 */
 	public JPanel getMuniJPanel(){
 		return munition;		
