@@ -105,7 +105,7 @@ public class ListenerModel implements DionaRapListener {
 	 * Methode zeigt Dialog zum Eintagen in die Bestenliste an und schreibt
 	 * Punkte + Name in Bestenlistendatei
 	 */
-	public void addPlayerToBestenliste(){
+	private void addPlayerToBestenliste(){
 		String theme = hauptfenster.getTheme();
 		String pathIcon = "icons"+File.separator+theme+File.separator + "win.gif";
         String[] choices = {"Eintragen", "Abbrechen"};

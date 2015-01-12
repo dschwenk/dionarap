@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 class ThreadAmmo extends Thread {
 	
 	private Hauptfenster hauptfenster;
-	private static final int blinkDelay = 500;
+	private static final int blinktime = 500;
 
 
 	/**
@@ -31,7 +31,7 @@ class ThreadAmmo extends Thread {
 	/**
 	 * Methode ist fuer das Blinken der Munitionsanzeige zustaendig
 	 */
-    public void run(){
+	public void run(){
 		/* so lange Munition == 0 und noch keine 3 Sekunden vergangen sind */
 		for(int i=0;(i<6) && (hauptfenster.getDionaRapModel().getShootAmount()== 0);i++){
 			JLabel[] ammo = hauptfenster.getToolbar().getMuniJLabelArr();
@@ -47,10 +47,10 @@ class ThreadAmmo extends Thread {
 			}
 			try {
 				/* Thread schlafen legen */
-				Thread.sleep(blinkDelay);
+				Thread.sleep(blinktime);
 			} catch (InterruptedException ex) {
 				System.out.println("Catched exception in Thread Ammo.");
 			}
 		}
-    }
+	}
 }

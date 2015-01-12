@@ -42,7 +42,7 @@ public class Tastatur extends JPanel {
 	/**
 	 * Methode zum erzeugen von Buttons
 	 */
-	void addButtons(){
+	private void addButtons(){
 		// String mit Pfad zu Icons
 		String path_icons = "icons"+File.separator+"Navigator"+File.separator;
 		

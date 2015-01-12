@@ -48,7 +48,7 @@ public class Toolbar extends JToolBar {
 	 * Konstruktor der Toolbar vom Type <code>JToolBar</code>
 	 * Erstellt eine Toolbar mit Punktestand, Spielfortschritt, Munitionsanzeige etc.
 	 */
-	Toolbar(Hauptfenster hauptfenster){
+	public Toolbar(Hauptfenster hauptfenster){
 		this.hauptfenster = hauptfenster;
 		
 		/* Toolbar soll vom Benutzer nicht bewegent werden koennen */
@@ -117,16 +117,12 @@ public class Toolbar extends JToolBar {
 
 
 	/**
-	 * Zeige Bestenliste an
+	 * Methode liesst Bestenliste aus und zeigt diese in einer Tabelle an
 	 */
 	public void showBestenliste(){
 	
-		/* Spaltenname der Bestenlistetabelle */
-		String[] columnNames = {"Spielername", "Punkte", "Rang"};
-		JFrame frameBestenliste = new JFrame("Bestenliste");
-		String [] StringArrHighscore = null;
-		
 		// Auslesen der Bestenliste
+		String [] StringArrHighscore = null;
 		try{
 			StringArrHighscore = HighScoreFile.getInstance().readFromHighscore();
 		} catch (IOException ex) {
@@ -143,8 +139,13 @@ public class Toolbar extends JToolBar {
 		    }
 		    arr_list2d[i][2] = String.valueOf(i+1);
 		}
+		
 		/* lege Tabelle an */
+		/* Spaltenname der Bestenlistetabelle */
+		String[] columnNames = {"Spielername", "Punkte", "Rang"};		
 		JTable table = new JTable(arr_list2d, columnNames);
+		
+		JFrame frameBestenliste = new JFrame("Bestenliste");
 		frameBestenliste.add(new JScrollPane(table));
 		frameBestenliste.setLocationRelativeTo(hauptfenster);
 		frameBestenliste.setSize(300,300);
@@ -155,7 +156,7 @@ public class Toolbar extends JToolBar {
 	/**
 	 * Methode stellt die Munitionsanzeige in der Toolbar dar
 	 */
-	public void paintMunitionsAnzeige(){
+	private void paintMunitionsAnzeige(){
 		String theme = hauptfenster.getTheme();
 		String pathIcon = "icons"+File.separator+theme+File.separator + "ammo.png";
 		ImageIcon icon_munition = new ImageIcon(pathIcon);
@@ -209,55 +210,58 @@ public class Toolbar extends JToolBar {
 	}
 
 
+	/**
+	 * Methode aktualisiert die Toolbar
+	 */
 	public void updateToolbar(){
 		setScoreFieldText();
 		setProgressBarValue();
 		paintMunitionsAnzeige();
 	}
-
-
+	
+	
 	/**
 	 * Methode um den Button "Neues Spiel" zu aktivieren
 	 * (aktiv wenn Spiel gewonnen / verloren wurde)
 	 */
-    public void setButtonNSEnabled() {
-    	neuesspiel.setEnabled(true);
-    }
-
-
+	public void setButtonNSEnabled() {
+		neuesspiel.setEnabled(true);
+	}
+	
+	
 	/**
 	 * Methode um den Button "Neues Spiel" zu deaktivieren
 	 * (aktiv wenn Spiel gewonnen / verloren wurde)
 	 */
-    public void setButtonNSDisabled() {
-    	neuesspiel.setEnabled(false);
-    }
-
-
+	public void setButtonNSDisabled() {
+		neuesspiel.setEnabled(false);
+	}
+	
+	
 	/**
 	 * Methode um den aktuellen Punktestand zu setzen
 	 */
-    public void setScoreFieldText(){
-    	punktestandtext.setText(String.valueOf(hauptfenster.getDionaRapModel().getScore()));
-    }
-
-  
-	/**
+	public void setScoreFieldText(){
+		punktestandtext.setText(String.valueOf(hauptfenster.getDionaRapModel().getScore()));
+	}
+	
+	  
+		/**
 	 * Methode um den aktuellen Fortschritt zu setzen
 	 */
 	public void setProgressBarValue(){
 		fortschrittsbalken.setValue(hauptfenster.getGameProgress());
 	}
-
-
+	
+	
 	/**
 	 * Methode macht die Toolbar sichtbar
 	 */
 	public void showToolbar(){
 		this.setVisible(true);
 	}
-
-
+	
+	
 	/**
 	 * Methode macht die Toolbar unsichtbar
 	 */
@@ -265,7 +269,7 @@ public class Toolbar extends JToolBar {
 		this.setVisible(false);
 	}
 	
-
+	
 	/**
 	 * Methode gibt das Array fuer die Labels der Munitionsanzeige zurueck
 	 * @return JLabel[]
@@ -273,13 +277,13 @@ public class Toolbar extends JToolBar {
 	public JLabel[] getMuniJLabelArr(){
 		return munition_arr;
 	}
-
-
+	
+	
 	/**
 	 * Methode gibt das Panel fuer die Munitionsanzeige zurueck
 	 * @return JPanel gibt das JPanel der Munitionsanzeige zurueck
 	 */
 	public JPanel getMuniJPanel(){
 		return munition;		
-	}	
+	}
 }

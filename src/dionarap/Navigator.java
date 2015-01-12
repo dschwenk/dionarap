@@ -16,8 +16,6 @@ import javax.swing.JWindow;
  */
 public class Navigator extends JWindow {
 
-	private static final long serialVersionUID = 1L;
-	
 	/**
 	 * Konstruktor des Navigationsfensters vom Typ <code>JWindow</code>
 	 * @param parent Vaterfenster vom Typ <code>Hauptfenster</code>

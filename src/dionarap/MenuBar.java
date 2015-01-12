@@ -162,10 +162,10 @@ public class MenuBar extends JMenuBar implements ActionListener {
 	}
 
 
-    /**
-     * Eventhandler fuer das Event <code>actionPerformed</code>,
-     * Events zu den Elementen in der Menuleisten werden verarbeitet
-     */
+	/**
+	 * Eventhandler fuer das Event <code>actionPerformed</code>,
+	 * Events zu den Elementen in der Menuleisten werden verarbeitet
+	 */
 	public void actionPerformed(ActionEvent e){
 
 		/* welches Menuleistenelement hat das Event ausgeloest */
@@ -288,6 +288,6 @@ public class MenuBar extends JMenuBar implements ActionListener {
 		/* anzeigen der Spielbeschreibung */
 		if(e.getSource() == spielbeschreibung){
 			new Spielebeschreibung(hauptfenster);
-		}		
+		}
 	}
 }

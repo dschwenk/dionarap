@@ -20,7 +20,7 @@ public class ThreadField extends Thread{
 
 	private Hauptfenster hauptfenster;
 	
-	private static final int blinkDelay = 500;
+	private static final int blinktime = 500;
 	
 	/* Array das die Felder die blinken sollen enthaelt + counter */
 	private JLabel[] blink_arr = new JLabel[8];
@@ -40,7 +40,7 @@ public class ThreadField extends Thread{
 	 * Konstruktor
 	 * @param hauptfenster
 	 */
-	ThreadField(Hauptfenster hauptfenster) {
+	public ThreadField(Hauptfenster hauptfenster) {
 		this.hauptfenster = hauptfenster;
 		
 		/* fuelle Array mit SpielfeldLabels */
@@ -50,7 +50,7 @@ public class ThreadField extends Thread{
 		/* aktuelle Spielerposition */
 		player_pos_x = hauptfenster.getPlayer().getX();
 		player_pos_y = hauptfenster.getPlayer().getY();
-		
+
 		fillFieldArrayWithNeighboursFields();
 	}
 	
@@ -59,27 +59,27 @@ public class ThreadField extends Thread{
 	 * Methode ist fuer das Blinken der Felder zustaendig
 	 */
     public void run(){
-        /* so lange noch keine 3 Sekunden vergangen sind und geblinkt werden soll (keine gueltige Bewegung in der Zwischenzeit */
-    	for(int i=0;(i<6) && run;i++){
-            for(int k=0;k<count_fields_blink;k++){
-                /* abwechselnd Rand hinzufuegen / entfernen */
-            	if((i % 2) == 0){
-                	blink_arr[k].setBorder(BorderFactory.createLineBorder(Color.RED));
-                }
-                else {
-                	blink_arr[k].setBorder(BorderFactory.createEmptyBorder());
-                }
-                hauptfenster.getToolbar().getMuniJPanel().updateUI();
-            }
-            try {
-            	/* Thread schlafen legen */
-                Thread.sleep(blinkDelay);
-            } catch (InterruptedException ex) {}
-        }
-    	/* entferne alle Borders am Ende */
-    	for(int k=0;k<count_fields_blink;k++){
-    		blink_arr[k].setBorder(BorderFactory.createEmptyBorder());
-    	}
+		/* so lange noch keine 3 Sekunden vergangen sind und geblinkt werden soll (keine gueltige Bewegung in der Zwischenzeit */
+		for(int i=0;(i<6) && run;i++){
+			for(int k=0;k<count_fields_blink;k++){
+			    /* abwechselnd Rand hinzufuegen / entfernen */
+				if((i % 2) == 0){
+			    	blink_arr[k].setBorder(BorderFactory.createLineBorder(Color.RED));
+			    }
+			    else {
+			    	blink_arr[k].setBorder(BorderFactory.createEmptyBorder());
+			    }
+			    hauptfenster.getToolbar().getMuniJPanel().updateUI();
+			}
+			try {
+				/* Thread schlafen legen */
+			    Thread.sleep(blinktime);
+			} catch (InterruptedException ex) {}
+		}
+		/* entferne alle Borders am Ende */
+		for(int k=0;k<count_fields_blink;k++){
+			blink_arr[k].setBorder(BorderFactory.createEmptyBorder());
+		}
     }
 
 
@@ -88,7 +88,7 @@ public class ThreadField extends Thread{
      * sofern es sich um ein Hindernis handelt oder es ausserhalb
      * des Spielfelds ist
      */
-    public void fillFieldArrayWithNeighboursFields(){
+    private void fillFieldArrayWithNeighboursFields(){
     	/* gehe alle benachbarten Felder durch */
     	
     	/* links oben */
@@ -128,14 +128,14 @@ public class ThreadField extends Thread{
      * @param x Koordinate des benachbarten Felds
      * @return true falls Feld ein Hindernis ist oder ausserhalb des Spielfeld liegt
      */
-    public boolean isNeighbourFieldObstacleOrOutside(int y, int x){
+    private boolean isNeighbourFieldObstacleOrOutside(int y, int x){
 		
-    	/* sind Koordinaten ausserhalb des Spielfelds */
+		/* sind Koordinaten ausserhalb des Spielfelds */
 		if((y < 0) || (x < 0) || (y > hauptfenster.getDionaRapModel().getGrid().getGridSizeY())	|| (x > hauptfenster.getDionaRapModel().getGrid().getGridSizeX())){
 			return true;
 		}
 		/* ist auf Koordinate ein Hindernis */
-    	AbstractPawn[] spielfiguren = hauptfenster.getPawns();
+		AbstractPawn[] spielfiguren = hauptfenster.getPawns();
 		for(int i=0;i<spielfiguren.length;i++){
 			if(spielfiguren[i] instanceof Obstacle){
 				if(spielfiguren[i].getY() == y && spielfiguren[i].getX() == x){
@@ -152,7 +152,7 @@ public class ThreadField extends Thread{
      * @param y Koordinaten des benachbarten Felds
      * @param x Koordinaten des benachbarten Felds
      */
-    public void addBlinkLabel(int y, int x){
+    private void addBlinkLabel(int y, int x){
     	this.blink_arr[count_fields_blink] = spielfeld_arr[y][x];
     	this.count_fields_blink++;
     }
