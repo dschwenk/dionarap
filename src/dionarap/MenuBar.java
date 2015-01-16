@@ -2,35 +2,23 @@ package dionarap;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JDialog;
-import javax.swing.JEditorPane;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import de.fhwgt.dionarap.levelreader.LevelReader;
-import de.fhwgt.dionarap.model.data.MTConfiguration;
 
 /**
  * Klasse realisiert das Menu, abgeleitet von <code>JMenuBar</code>, implementiert <code>ActionListener</code>
  * 
- * @author Daniel Schwenk
+ * @author Daniel Schwenk und Fabian Frick
  * @version Aufgabe 7
  */
 public class MenuBar extends JMenuBar implements ActionListener {
@@ -75,7 +63,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
 
 	/**
 	 * Konstruktor der Menuleiste vom Typ <code>JMenuBar</code>
-	 * @param parent Vaterfenster vom Typ <code>Hauptfenster</code>
+	 * @param hauptfenster Vaterfenster vom Typ <code>Hauptfenster</code>
 	 */	
 	public MenuBar(Hauptfenster hauptfenster){
 		
@@ -257,17 +245,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
 				/* starte Levelreader (erwartet Instanz der DionaRap Models + MTConfiguration) und uebergebe ausgewaehlte Datei */
 				LevelReader levelreader = new LevelReader(hauptfenster.getMTConfiguration(), hauptfenster.getDionaRapModel());
 				levelreader.readLevel(filechooser.getSelectedFile().toString());
-				/* neues Spielfeld + zeichne Icons */ 
-				hauptfenster.getSpielfeld().addLabelsToSchachbrett();
-				hauptfenster.getSpielfeld().repaintPawns();
-				/* setzte neue Mutlithireading Konfiguration */
-				hauptfenster.getDionaRapController().setMultiThreaded(hauptfenster.getDionaRapModel().getActiveConfiguration());
-				/* Toolbar aktualisieren */
-				hauptfenster.getToolbar().updateToolbar();
-				/* Hauuptfenster packen + Navigtor neu positionieren (Spielfeldgroesse hat sich evtl. geaendert) */
-				hauptfenster.pack();
-				hauptfenster.getNavigator().setNavPosition();
-				
+			
 				// soll nachdem ein Level eingelesen wurde beim naechsten neuen Spiel diese Daten uebenrommen werden oder "Standardspiel" gestartet werden??
 				/* aktualisiere Spieleinstellungen mit den Einstellungen aus der XML */
 				hauptfenster.updateGameSettings(
@@ -277,6 +255,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
 						hauptfenster.getDionaRapModel().getObstacles().size()
 				);
 				hauptfenster.setFlagGameSettingsChanged();
+				hauptfenster.startNewGame();
 			}
 		}
 

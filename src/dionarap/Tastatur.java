@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 /**
  * Klasse realisiert die Buttons zur Steuerung, abgeleitet von <code>JPanel</code>
  * 
- * @author Daniel Schwenk
+ * @author Daniel Schwenk und Fabian Frick
  * @version Aufgabe 7
  */
 public class Tastatur extends JPanel {

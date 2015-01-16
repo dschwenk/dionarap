@@ -13,14 +13,14 @@ import de.fhwgt.dionarap.controller.DionaRapController;
  * Klasse realisiert den Listener fuer die Bewegungsbuttons. Die Klasse implementiert
  * dazu das Interface <code>ActionListener</code>. 
  *   
- * @author Daniel Schwenk
+ * @author Daniel Schwenk und Fabian Frick
  * @version Aufgabe 7
  */
 public class ListenerBewegung implements ActionListener {
 
 	/**
 	 * Eventhanlder fuer das Druecken der Bewegungsbuttons <code>actionPerfomred</code>
-	 * Bewegungsbuttons 1-4 & 6-9
+	 * Bewegungsbuttons 1-4 und 6-9
 	 * @param e Button der das Event ausgeloest hat
 	 */
 	public void actionPerformed(ActionEvent e){

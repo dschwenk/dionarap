@@ -10,7 +10,7 @@ import javax.swing.JButton;
  * Klasse realisiert den Listener fuer die Toolbar. Die Klasse implementiert
  * dazu das Interface <code>ActionListener</code>. 
  *   
- * @author Daniel Schwenk
+ * @author Daniel Schwenk und Fabian Frick
  * @version Aufgabe 7
  */
 public class ListenerToolbar implements ActionListener {

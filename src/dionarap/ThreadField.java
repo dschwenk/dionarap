@@ -13,7 +13,7 @@ import de.fhwgt.dionarap.model.objects.Obstacle;
  * Klasse realisiert den Thread der fuer das Blinken 
  * einzelner Spielfeldfelder zustaendig ist, abgleitet von <code>Thread</code>
  * 
- * @author Daniel Schwenk
+ * @author Daniel Schwenk und Fabian Frick
  * @version Aufgabe 7
  */
 public class ThreadField extends Thread{
@@ -38,7 +38,7 @@ public class ThreadField extends Thread{
 	
 	/**
 	 * Konstruktor
-	 * @param hauptfenster
+	 * @param hauptfenster das Hauptfenster
 	 */
 	public ThreadField(Hauptfenster hauptfenster) {
 		this.hauptfenster = hauptfenster;
@@ -131,7 +131,7 @@ public class ThreadField extends Thread{
     private boolean isNeighbourFieldObstacleOrOutside(int y, int x){
 		
 		/* sind Koordinaten ausserhalb des Spielfelds */
-		if((y < 0) || (x < 0) || (y > hauptfenster.getDionaRapModel().getGrid().getGridSizeY())	|| (x > hauptfenster.getDionaRapModel().getGrid().getGridSizeX())){
+		if((y < 0) || (x < 0) || (y >= hauptfenster.getDionaRapModel().getGrid().getGridSizeY())	|| (x >= hauptfenster.getDionaRapModel().getGrid().getGridSizeX())){
 			return true;
 		}
 		/* ist auf Koordinate ein Hindernis */

@@ -23,7 +23,7 @@ import javax.swing.JToolBar;
 /**
  * Klasse realisiert die Toolbar, abgeleitet von <code>JToolBar</code>
  * 
- * @author Daniel Schwenk
+ * @author Daniel Schwenk und Fabian Frick
  * @version Aufgabe 7
  */
 public class Toolbar extends JToolBar {
@@ -47,6 +47,7 @@ public class Toolbar extends JToolBar {
 	/**
 	 * Konstruktor der Toolbar vom Type <code>JToolBar</code>
 	 * Erstellt eine Toolbar mit Punktestand, Spielfortschritt, Munitionsanzeige etc.
+	 * @param hauptfenster das Hauptfenster
 	 */
 	public Toolbar(Hauptfenster hauptfenster){
 		this.hauptfenster = hauptfenster;

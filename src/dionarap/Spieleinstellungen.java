@@ -17,7 +17,7 @@ import de.fhwgt.dionarap.model.data.MTConfiguration;
 /**
  * Klasse ermoeglicht es Spieleinstellungen vorzunehmen, abgeleitet von <code>JDialog</code>
  * 
- * @author Daniel Schwenk
+ * @author Daniel Schwenk und Fabian Frick
  * @version Aufgabe 7
  */
 public class Spieleinstellungen extends JDialog implements ActionListener {
@@ -33,7 +33,7 @@ public class Spieleinstellungen extends JDialog implements ActionListener {
     
 	/**
 	 * Konstruktor der Spieleinstellungen vom Typ <code>JPanel</code>
-	 * @param parent Vaterfenster vom Typ <code>Hauptfenster</code>
+	 * @param hauptfenster Vaterfenster vom Typ <code>Hauptfenster</code>
 	 */
 	public Spieleinstellungen(Hauptfenster hauptfenster){
 		this.hauptfenster = hauptfenster;

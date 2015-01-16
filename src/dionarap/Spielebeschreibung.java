@@ -15,7 +15,7 @@ import javax.swing.JScrollPane;
 /**
  * Klasse realisiert die Darstellung der Spielbeschreibung, abgeleitet von  <code>JDialog</code>
  * 
- * @author Daniel Schwenk
+ * @author Daniel Schwenk und Fabian Frick
  * @version Aufgabe 7
  */
 public class Spielebeschreibung extends JDialog {
@@ -26,7 +26,7 @@ public class Spielebeschreibung extends JDialog {
 	
 	/**
 	 * Konstruktor der Spielebeschreibung vom Typ <code>JDialog</code>
-	 * @param parent Vaterfenster vom Typ <code>Hauptfenster</code>
+	 * @param hauptfenster Vaterfenster vom Typ <code>Hauptfenster</code>
 	 */		
 	public Spielebeschreibung(Hauptfenster hauptfenster){
 		this.hauptfenster = hauptfenster;
@@ -40,8 +40,6 @@ public class Spielebeschreibung extends JDialog {
         editorPane.setEditable(false);
         /* URL Objekt erstellen */
         try {
-        	// Windows - file:///
-        	// Linux - file://
             url = new URL("file:///" + gamedirectory + "html" + separator + "spielbeschreibung.html");
         }
         catch (MalformedURLException ex) {

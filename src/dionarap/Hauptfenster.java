@@ -17,7 +17,7 @@ import de.fhwgt.dionarap.controller.DionaRapController;
 /**
  * Hauptfenster von DionaRap. Enthält die main()-Methode.
  * 
- * @author Daniel Schwenk
+ * @author Daniel Schwenk und Fabian Frick
  * @version Aufgabe 7
  */
 public class Hauptfenster extends JFrame {
@@ -184,6 +184,7 @@ public class Hauptfenster extends JFrame {
 	/**
 	 * Methode zur Darstellung des Dialogs fuer die Anzeige der
 	 * Spielergebnisse ("Game Over" und "Gewonnen")
+	 * @param game_lost wurde das Spiel gewonnen oder verloren
 	 */
 	public void drawGameResultDialog(boolean game_lost){
 		this.requestFocus();
@@ -265,7 +266,10 @@ public class Hauptfenster extends JFrame {
 
 	/**
 	 * Methode aktualisiert die Groesse des Spielfelds, Anzahl an Gegnern + Hindernisse
-	 * @param int y, int x, int opponents, int obstacles - Groesse des Felds in x- und y-Richtung, Anzahl an Gegner + Hindernisse
+	 * @param y Groesse des Felds in y-Richtung
+	 * @param x Groesse des Felds in x-Richtung
+	 * @param opponents Anzahl an Gegner
+	 * @param obstacles Anzahl an Hindernisse
 	 */
 	public void updateGameSettings(int y, int x, int opponents, int obstacles){
 		this.grid = new Grid(y,x);
@@ -379,7 +383,7 @@ public class Hauptfenster extends JFrame {
 
 	/**
 	 * Setzt das Theme
-	 * @param String theme
+	 * @param theme String des Themes
 	 */
 	public void setTheme(String theme){
 		this.theme = theme;
@@ -389,7 +393,7 @@ public class Hauptfenster extends JFrame {
 
 	/**
 	 * Methode gibt das Grid fuer die Spielfeldgroesse zurueck
-	 * @return 
+	 * @return Grid gibt die Groesse des Spielfelds in X- und Y-Richtung zurueck
 	 */
 	public Grid getGrid(){
 		return this.grid;
@@ -398,6 +402,7 @@ public class Hauptfenster extends JFrame {
 	
 	/**
 	 * Methode gibt die Anzahl der Gegner zurueck
+	 * @return int gibt Anzahl an Gegener zurueck 
 	 */
 	public int getOpponentCount(){
 		return this.opponents;
@@ -406,6 +411,7 @@ public class Hauptfenster extends JFrame {
 
 	/**
 	 * Methode gibt die Anzahl der Hindernisse zurueck
+	 * @return int gibt Anzahl an Hindernissen zurueck
 	 */
 	public int getObstacleCount(){
 		return this.obstacles;
@@ -467,6 +473,7 @@ public class Hauptfenster extends JFrame {
 	
 	/**
 	 * Gibt Sound zurueck
+	 * @return Sound gibt Sound zurueck
 	 */
 	public Sound getSounds(){
 		return this.sounds;

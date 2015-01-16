@@ -11,7 +11,7 @@ import de.fhwgt.dionarap.controller.DionaRapController;
 /**
  * Klasse realisiert den Listener der auf einen Schuss reagiert. Die Klasse implementiert
  * das Interface <code>ActionListener</code>. 
- * @author Daniel Schwenk
+ * @author Daniel Schwenk und Fabian Frick
  * @version Aufgabe 7
  */
 public class ListenerWaffe implements ActionListener {

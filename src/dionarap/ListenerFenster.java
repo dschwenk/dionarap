@@ -7,7 +7,7 @@ import java.awt.event.ComponentListener;
  * Klasse realisiert den Listener fuer die Bewegung des Navigators. Die Klasse implementiert
  * dazu das Interface <code>ComponentListener</code>. 
  *   
- * @author Daniel Schwenk
+ * @author Daniel Schwenk und Fabian Frick
  * @version Aufgabe 7
  */
 public class ListenerFenster implements ComponentListener {

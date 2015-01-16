@@ -13,7 +13,7 @@ import javax.sound.sampled.LineUnavailableException;
 /**
  * Klasse realisiert den Sound
  * 
- * @author Daniel Schwenk
+ * @author Daniel Schwenk und Fabian Frick
  * @version Aufgabe 7
  */
 public class Sound {
@@ -36,7 +36,7 @@ public class Sound {
 	
 	/**
 	 * Konstruktor der Klasse Sound
-	 * @param das Vaterfenster
+	 * @param hauptfenster das Vaterfenster
 	 */
 	public Sound(Hauptfenster hauptfenster){
 		

@@ -20,7 +20,7 @@ import de.fhwgt.dionarap.model.objects.Vortex;
 /**
  * Klasse realisiert das Spielfeld, abgeleitet von <code>JPanel</code>
  * 
- * @author Daniel Schwenk
+ * @author Daniel Schwenk und Fabian Frick
  * @version Aufgabe 7
  */
 public class Spielfeld extends JPanel {
@@ -56,7 +56,7 @@ public class Spielfeld extends JPanel {
 	/**
 	 * Konstruktor des Spielfelds vom Type <code>JPanel</code>
 	 * Erstellt ein Spielfeld / Schachbrett mit x * y Feldern
-	 * @param das Vaterfenster
+	 * @param hauptfenster das Vaterfenster
 	 */		
 	public Spielfeld(Hauptfenster hauptfenster){
 		
@@ -72,7 +72,6 @@ public class Spielfeld extends JPanel {
 
 	/**
 	 * Fuegt Spielfelder zum Spielfeld hinzu
-	 * @param size_spielfeld Groesse des Spielfelds
 	 */	
 	public void addLabelsToSchachbrett(){
 		/* Layout + Array fuer Schabrett-Labels */
@@ -120,6 +119,7 @@ public class Spielfeld extends JPanel {
 	 * Methode aktualisiert das Theme
 	 */
 	public void changeTheme(){
+		this.repaintSpielfeld();
 		this.setIcons();
 		this.removeIconsFromSpielfeld();
 		this.paintPawns(hauptfenster.getPawns());	
@@ -161,6 +161,16 @@ public class Spielfeld extends JPanel {
 	public void repaintPawns(){
 		this.removeIconsFromSpielfeld();
 		this.paintPawns(this.hauptfenster.getPawns());
+	}
+	
+	
+	/**
+	 * Loescht die Labels vom Spielfeld und fueg diese
+	 * neu hinzu
+	 */
+	public void repaintSpielfeld(){
+		this.removeSpielfeldLabels();
+		this.addLabelsToSchachbrett();
 	}
 
 
@@ -267,8 +277,8 @@ public class Spielfeld extends JPanel {
 
 	/**
 	 * Setzt das Gewonnen / Verloren SpielerIcon auf das Spielfeld
-	 * @param Player spieler Spielerfigur
-	 * @param boolean game_lost Wurde Spiel gewonnen / verloren
+	 * @param spieler Spielerfigur
+	 * @param game_lost Wurde Spiel gewonnen / verloren
 	 */
 	public void gameStatusEnd(Player spieler, boolean game_lost){
 		/* Spiel wurde verloren */
@@ -284,6 +294,7 @@ public class Spielfeld extends JPanel {
 
 	/**
 	 * Gibt die Spielfeldgroesse in X-Richtung zurueck
+	 * @return int Spielfeldgroesse in X-Richtung	 * 
 	 */
 	public int getSpielfeldSizeX(){
 		return this.size_spielfeld_x;
@@ -292,6 +303,7 @@ public class Spielfeld extends JPanel {
 
 	/**
 	 * Gibt die Spielfeldgroesse in Y-Richtung zurueck
+	 * @return int Spielfeldgroesse in Y-Richtung
 	 */
 	public int getSpielfeldSizeY(){
 		return this.size_spielfeld_y;
@@ -300,6 +312,7 @@ public class Spielfeld extends JPanel {
 
 	/**
 	 * Gibt das Spielfeld zurueck
+	 * @return JLabel[][] Spielfeldarray
 	 */
 	public JLabel[][] getSpielfeldArray(){
 		return this.Schachbrett;

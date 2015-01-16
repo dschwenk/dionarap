@@ -10,7 +10,7 @@ import javax.swing.JLabel;
  * Klasse realisiert den Thread der fuer das Blinken 
  * der Munitionsanzeige zustaendig ist, abgleitet von <code>Thread /code>
  * 
- * @author Daniel Schwenk
+ * @author Daniel Schwenk und Fabian Frick
  * @version Aufgabe 7
  */
 class ThreadAmmo extends Thread {
@@ -43,7 +43,7 @@ class ThreadAmmo extends Thread {
 				else {
 				    ammo[k].setBorder(BorderFactory.createEmptyBorder());
 				}
-				hauptfenster.getToolbar().getMuniJPanel().updateUI();
+				//hauptfenster.getToolbar().getMuniJPanel().updateUI();
 			}
 			try {
 				/* Thread schlafen legen */

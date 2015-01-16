@@ -8,7 +8,7 @@ import javax.swing.filechooser.FileFilter;
 /**
  * Klasse realisiert einen Dateifilter, abgeleitet <code>FileFilter</code>
  * 
- * @author Daniel Schwenk
+ * @author Daniel Schwenk und Fabian Frick
  * @version Aufgabe 7
  */
 public class XMLExtensionFileFilter extends FileFilter {
@@ -18,8 +18,8 @@ public class XMLExtensionFileFilter extends FileFilter {
     
     /**
      * Konstruktor - legt Beschreibung und Dateieindung fest
-     * @param beschreibung 
-     * @param dateiendung
+     * @param beschreibung die Beschreibung
+     * @param dateiendung die Dateiendung die Voreingestellt wird
      */
     public XMLExtensionFileFilter(String beschreibung, String dateiendung[]) {
         this.beschreibung = beschreibung;

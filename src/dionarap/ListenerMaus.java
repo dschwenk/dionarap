@@ -21,7 +21,7 @@ import de.fhwgt.dionarap.model.objects.Obstacle;
  * von  <code>MouseAdapter</code> und implementiert
  * das Interface <code>ActionListener</code>. 
  *   
- * @author Daniel Schwenk
+ * @author Daniel Schwenk und Fabian Frick
  * @version Aufgabe 7
  */
 public class ListenerMaus extends MouseAdapter implements ActionListener {
@@ -44,7 +44,7 @@ public class ListenerMaus extends MouseAdapter implements ActionListener {
 	
     /**
      * Konstruktor der Klasse ListenerMaus
-     * @param Hauptfenster
+     * @param hauptfenster das Vaterfenster
      */
     public ListenerMaus(Hauptfenster hauptfenster){
     	this.hauptfenster = hauptfenster;
@@ -94,7 +94,7 @@ public class ListenerMaus extends MouseAdapter implements ActionListener {
 			dracula.setEnabled(true);
 			spaceWars.setEnabled(true);
 			squareHead.setEnabled(false);
-		}
+		}		
 	}
 
 	
